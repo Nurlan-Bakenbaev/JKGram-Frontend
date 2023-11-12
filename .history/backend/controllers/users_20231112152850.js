@@ -50,7 +50,7 @@ export const addRemoveFriends = async (req, res) => {
         return { _id, firstName, lastName, occupation, picturePath };
       }
     );
-    res.status(200).json(formattedFriends);
+    res.status(200).json
   } catch (error) {
     res.status(404).json({ message: err.message });
   }
