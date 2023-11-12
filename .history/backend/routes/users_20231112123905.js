@@ -11,6 +11,6 @@ const router = express.Router();
 router.get("/:id", verifyToken, getUser);
 router.get("/:id/friends", verifyToken, getUserFriends);
 //UPDATE
-router.patch("/:id/:friendId", verifyToken, addRemoveFriends);
+router.patch("/:id/:friend", verifyToken, getUserFriends);
 
-export default router;
+

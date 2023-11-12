@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 import multer from "multer";
 import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
+import userRoutes from "./routes/users.js"
 
 //CONFIGURATIONS
 const __filename = fileURLToPath(import.meta.url);

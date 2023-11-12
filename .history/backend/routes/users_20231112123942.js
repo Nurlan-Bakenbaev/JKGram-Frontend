@@ -13,4 +13,4 @@ router.get("/:id/friends", verifyToken, getUserFriends);
 //UPDATE
 router.patch("/:id/:friendId", verifyToken, addRemoveFriends);
 
-export default router;
+export de
