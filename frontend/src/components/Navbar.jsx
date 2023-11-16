@@ -1,0 +1,42 @@
+import React from "react";
+import MenuLinks from "./MenuLinks";
+import SearchIcon from "@mui/icons-material/Search";
+import MobileMenu from "./MobileMenu";
+import { useSelector } from "react-redux";
+const Navbar = () => {
+  const mode = useSelector((state) => state.auth.mode);
+  return (
+    <nav
+      className={`h-[80px]  
+    flex justify-between items-center 
+    px-2 md:px-10 ${!mode && "drop-shadow-xl"}`}
+    >
+      <div className="flex gap-5 items-center">
+        <h2
+          className={`uppercase hidden md:block md:text-2xl
+         font-bold`}
+        >
+          Friendsgram
+        </h2>
+        <form className="relative flex items-center">
+          <input
+            placeholder="Search..."
+            className="p-1 pl-3 outline-none text-black rounded"
+            type="text"
+          />
+          <span className="absolute right-3 text-blue-500  hover:text-green-500  hover:scale-110">
+            <SearchIcon />
+          </span>
+        </form>
+      </div>
+      <div>
+        <div className="hidden md:flex">
+          <MenuLinks flex={"row"} />
+        </div>
+        <MobileMenu />
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
