@@ -1,18 +1,14 @@
-import Form from "../components/Form";
+// Login.jsx
+import React, { useState } from "react";
+import Register from "../components/RegisterForm";
+import LoginForm from "../components/LoginForm";
+
 const Login = () => {
+  const [form, setForm] = useState("login");
   return (
-    <div>
-      <div className="h-20 flex justify-center items-center">
-        <h2
-          className="uppercase block md:text-3xl
-         font-bold"
-        >
-          Friendsgram
-        </h2>
-      </div>
-      <div>
-        <Form />
-      </div>
+    <div className="bg-slate-800 min-h-screen flex items-center justify-center">
+      {form === "login" && <LoginForm setForm={setForm} />}
+      {form === "register" && <Register setForm={setForm} />}
     </div>
   );
 };
