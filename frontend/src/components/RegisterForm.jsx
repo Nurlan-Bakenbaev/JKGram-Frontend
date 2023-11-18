@@ -1,7 +1,7 @@
 // Register.jsx
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-
+import axios from "axios";
 const Register = ({ setForm }) => {
   const [register, setRegister] = useState({
     firstName: "",
@@ -10,43 +10,76 @@ const Register = ({ setForm }) => {
     password: "",
     occupation: "",
     location: "",
-    picture: "",
   });
-  console.log(register);
+  const onDrop = (acceptedFiles) => {
+    setRegister({ ...register, picture: acceptedFiles[0] });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
   };
+  console.log(register);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
+    onDrop,
   });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formData = new FormData();
+      for (const key in register) {
+        formData.append(key, register[key]);
+      }
+
+      const response = await axios.post(
+        "YOUR_BACKEND_API_URL/register",
+        formData
+      );
+
+      if (response.status === 200) {
+        console.log("Registration successful");
+        setForm("login");
+      } else {
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
 
   return (
-    <div className="bg-slate-800 p-8 md:p-4 h-screen w-screen flex items-center justify-center">
-      <div className=" md:max-w-md w-full md:min-w-[500px] p-6 md:bg-slate-300 rounded-md ">
-        <h2 className="text-3xl text-center font-extrabold  md:text-gray-800 mb-6">
+    <div className=" flex items-center justify-center">
+      <div className="max-w-[300px] md:min-w-[500px] p-4 bg-slate-300 rounded-md ">
+        <h2 className="text-3xl text-center font-extrabold text-gray-800 mb-6">
           Register
         </h2>
-        <form className="space-y-4 flex flex-col text-black ">
-          <input
-            type="text"
-            name="firstName"
-            required
-            className="form-input px-5 py-2"
-            placeholder="First Name"
-            onChange={handleChange}
-            value={register.firstName}
-          />
+        <form
+          onClick={handleSubmit}
+          className="space-y-4 flex flex-col text-black "
+        >
+          <div className="flex gap-4">
+            <input
+              type="text"
+              name="firstName"
+              required
+              className="form-input px-5 py-2 w-full"
+              placeholder="First Name"
+              onChange={handleChange}
+              value={register.firstName}
+            />
 
-          <input
-            type="text"
-            name="lastName"
-            required
-            className="form-input px-5 py-2"
-            placeholder="Last Name"
-            onChange={handleChange}
-            value={register.lastName}
-          />
+            <input
+              type="text"
+              name="lastName"
+              required
+              className="form-input px-5 py-2 w-full"
+              placeholder="Last Name"
+              onChange={handleChange}
+              value={register.lastName}
+            />
+          </div>
 
           <input
             type="email"
@@ -66,34 +99,38 @@ const Register = ({ setForm }) => {
             onChange={handleChange}
             value={register.password}
           />
-          <input
-            type="text"
-            name="occupation"
-            required
-            className="form-input px-4 py-2"
-            placeholder="Occupation"
-            onChange={handleChange}
-            value={register.occupation}
-          />
+          <div className="flex gap-4">
+            <input
+              type="text"
+              name="occupation"
+              required
+              className="form-input px-4 py-2 w-full"
+              placeholder="Occupation"
+              onChange={handleChange}
+              value={register.occupation}
+            />
 
-          <input
-            type="text"
-            name="location"
-            className="form-input px-5 py-2"
-            placeholder="Location"
-            onChange={handleChange}
-            value={register.location}
-          />
+            <input
+              type="text"
+              name="location"
+              className="form-input px-5 py-2 w-full"
+              placeholder="Location"
+              onChange={handleChange}
+              value={register.location}
+            />
+          </div>
 
           <div {...getRootProps()} className="mt-2">
-            <input {...getInputProps()} />
+            <input name="picture" {...getInputProps()} />
             <div className="text-gray-500 cursor-pointer text-center group  border border-dashed border-blue-400 px-5 py-7 text-sm">
               <div className="transition duration-500 group-hover:scale-110">
                 <span className="uppercase text-blue-700 font-bold px-1">
-                  Drag an drop
+                  {register.picture ? register.picture.name : "Drag an drop"}
                 </span>
-                your profile picture or
-                <span className="text-blue-700">click here</span>
+                {register.picture
+                  ? "change the picture"
+                  : "your profile picture or"}
+                <span className="text-blue-700 px-1">click here</span>
               </div>
             </div>
           </div>

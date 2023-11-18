@@ -11,7 +11,7 @@ const LoginForm = ({ setForm }) => {
   };
   return (
     <div>
-      <div className="w-[320px] md:w-[500px] h-[55vh] p-8 bg-slate-300 rounded-md ">
+      <div className="w-[300px] md:w-[500px] h-[55vh] p-6 bg-slate-300 rounded-md ">
         <h2 className="text-3xl text-center font-extrabold text-gray-800 mb-6">
           Login
         </h2>
@@ -34,7 +34,7 @@ const LoginForm = ({ setForm }) => {
           
           <button
             type="submit"
-            className=" p-2 bg-blue-700 text-white rounded-md hover:bg-blue-600 outline-none"
+            className=" p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 outline-none"
           >
             Login
           </button>
