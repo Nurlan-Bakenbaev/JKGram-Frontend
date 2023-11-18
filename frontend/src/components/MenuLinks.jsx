@@ -35,11 +35,13 @@ const MenuLinks = () => {
         </button>
 
         <select id="userName" className="text-black rounded-lg p-2 outline ">
-          <option>{(user?.firstName && user?.lastName) || "User name"}</option>
+          <option>
+            {(user?.firstName && user?.lastName) || "Default name"}
+          </option>
           <option onClick={() => dispatch(setLogOut())}>Log out</option>
         </select>
         <Link
-          to={"/"}
+          to={"/home"}
           className={`absolute bottom-8 md:hidden text-2xl
               font-bold bg-clip-text text-transparent
               bg-gradient-to-r from-blue-500 to-purple-500`}
