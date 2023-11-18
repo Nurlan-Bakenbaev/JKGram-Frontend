@@ -16,7 +16,6 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
       unique: true,
       minlength: 2,
       maxlength: 50,
@@ -26,7 +25,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
 
       minlength: 6,
-      maxlength: 50,
+      maxlength: 120,
     },
     picturePath: {
       type: String,

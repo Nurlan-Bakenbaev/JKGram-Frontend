@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuLinks from "./MenuLinks";
 
 const MobileMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="relative flex md:hidden ">
       <div className="z-30">

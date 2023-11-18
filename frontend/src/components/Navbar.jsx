@@ -14,10 +14,12 @@ const Navbar = () => {
       <div className="flex gap-5 items-center">
         <h2
           className={`uppercase hidden md:block md:text-2xl
-         font-bold`}
+              font-bold bg-clip-text text-transparent
+              bg-gradient-to-r from-blue-500 to-purple-500`}
         >
-          Friendsgram
+          POSTGRAMM
         </h2>
+
         <form className="relative flex items-center">
           <input
             placeholder="Search..."

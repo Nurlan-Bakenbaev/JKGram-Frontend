@@ -5,7 +5,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { useSelector, useDispatch } from "react-redux";
 import { setLogOut, setMode } from "../redux/index";
 import HelpIcon from "@mui/icons-material/Help";
-
+import { Link } from "react-router-dom";
 const MenuLinks = () => {
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
@@ -35,9 +35,17 @@ const MenuLinks = () => {
         </button>
 
         <select id="userName" className="text-black rounded-lg p-2 outline ">
-          <option>{`User Name`}</option>
+          <option>{(user?.firstName && user?.lastName) || "User name"}</option>
           <option onClick={() => dispatch(setLogOut())}>Log out</option>
         </select>
+        <Link
+          to={"/"}
+          className={`absolute bottom-8 md:hidden text-2xl
+              font-bold bg-clip-text text-transparent
+              bg-gradient-to-r from-blue-500 to-purple-500`}
+        >
+          POSTGRAMM
+        </Link>
       </div>
     </div>
   );
