@@ -34,7 +34,7 @@ const Register = ({ setForm }) => {
       }
 
       const response = await axios.post(
-        "YOUR_BACKEND_API_URL/register",
+        "http://localhost:3001/auth/register",
         formData
       );
 
