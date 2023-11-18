@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import Loader from "./Loader";
-import { useNavigate } from "react-router-dom";
 const Register = ({ setForm }) => {
   const [register, setRegister] = useState({
     firstName: "",
@@ -13,7 +12,6 @@ const Register = ({ setForm }) => {
     occupation: "",
     location: "",
   });
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = (acceptedFiles) => {
@@ -42,8 +40,9 @@ const Register = ({ setForm }) => {
         formData
       );
 
-      if (response.status === 201) {
-        navigate("/");
+      if (response) {
+        setIsLoading(false);
+        setForm("login");
       } else {
         console.error("Registration failed");
       }
@@ -57,8 +56,8 @@ const Register = ({ setForm }) => {
     return (
       <div className=" flex items-center justify-center">
         <div className="max-w-[300px] md:min-w-[500px] p-4 bg-slate-300 rounded-md ">
-          <h2 className="text-3xl text-center font-extrabold text-gray-800 mb-6">
-            Register
+          <h2 className="text-3xl text-center  text-slate-700 mb-6">
+            register
           </h2>
           <form
             onSubmit={handleSubmit}
