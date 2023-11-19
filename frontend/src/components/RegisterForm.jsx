@@ -1,5 +1,5 @@
 // Register.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import Loader from "./Loader";
@@ -12,6 +12,7 @@ const Register = ({ setForm }) => {
     occupation: "",
     location: "",
   });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = (acceptedFiles) => {
@@ -34,7 +35,7 @@ const Register = ({ setForm }) => {
       for (const key in register) {
         formData.append(key, register[key]);
       }
-
+      formData.append("picturePath", register.picture.name);
       const response = await axios.post(
         "http://localhost:3001/auth/register",
         formData
@@ -43,8 +44,6 @@ const Register = ({ setForm }) => {
       if (response) {
         setIsLoading(false);
         setForm("login");
-      } else {
-        console.error("Registration failed");
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -54,9 +53,12 @@ const Register = ({ setForm }) => {
     return <Loader />;
   } else
     return (
-      <div className=" flex items-center justify-center">
-        <div className="max-w-[300px] md:min-w-[500px] p-4 bg-slate-300 rounded-md ">
-          <h2 className="text-3xl text-center  text-slate-700 mb-6">
+      <div className=" flex items-center
+       justify-center">
+        <div className="max-w-[300px] md:min-w-[500px] 
+        p-4 bg-slate-300 rounded-md ">
+          <h2 className="text-3xl text-center 
+           text-slate-700 mb-6">
             register
           </h2>
           <form

@@ -2,14 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Navbar from "./components/Navbar";
 import { useSelector } from "react-redux";
-
+import { Navigate } from "react-router-dom";
 const App = () => {
   let mode = useSelector((state) => state.auth.mode);
+  const isAuth = Boolean(useSelector((state) => state.auth.token));
   return (
     <BrowserRouter>
-      {/* Theme Provider*/}
       <div
         className={`${
           mode ? " bg-slate-800 text-white" : "bg-white text-black"
@@ -17,8 +16,14 @@ const App = () => {
       >
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/home"
+            element={isAuth ? <Home /> : <Navigate to={"/"} />}
+          />
+          <Route
+            path="/profile"
+            element={isAuth ? <Profile /> : <Navigate to={"/"} />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

@@ -17,8 +17,9 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
     },
     setLogOut: (state) => {
-      (state.user = null), (state.token = null);
-      console.log("User is Log out")
+      state.user = null;
+      state.token = null;
+      console.log("User is Log out");
     },
     setFriens: (state, action) => {
       if (state.user) {

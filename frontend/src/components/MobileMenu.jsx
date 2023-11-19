@@ -23,7 +23,7 @@ const MobileMenu = () => {
           <>
             <div
               className={`fixed z-20 top-[80px] bottom-0
-          bg-slate-700 w-[250px] right-0 `}
+          bg-slate-700 w-[250px] right-0 border-l border-slate-500 `}
             >
               <MenuLinks />
             </div>
