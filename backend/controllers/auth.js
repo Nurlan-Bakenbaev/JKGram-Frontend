@@ -27,6 +27,7 @@ export const register = async (req, res) => {
       friends,
       location,
       occupation,
+      //temporary
       viewedProfile: Math.floor(Math.random() * 1000),
       impressions: Math.floor(Math.random() * 1000),
     });
@@ -48,7 +49,10 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
       return res.status(400).json({ msg: "User or password is inccorect" });
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const expiresIn = 7 * 24 * 60 * 60;
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: expiresIn,
+    });
     delete user.password;
     res.status(200).json({ token, user });
   } catch (error) {
