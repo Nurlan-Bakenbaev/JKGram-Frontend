@@ -9,7 +9,7 @@ export const verifyToken = async (req, res, next) => {
     const veryfied = jwt.verify(token, process.env.JWT_SECRET);
     req.user = veryfied;
     next()
-  } catch (error) {
-    res.status(500).json(error);
+  } catch (err) {
+    res.status(500).json(err);
   }
 };

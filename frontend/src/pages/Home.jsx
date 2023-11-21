@@ -25,7 +25,7 @@ const Home = () => {
     setLoading(false);
 
     initializeAuthentication();
-  }, []);
+  }, [dispatch, setLoading]);
   if (loading) {
     return <Loader />;
   }
