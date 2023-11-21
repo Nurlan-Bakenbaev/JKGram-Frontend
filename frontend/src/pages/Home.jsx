@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { setLogin } from "../redux";
 import UserWidget from "../components/widgets/UserWidget";
 import Loader from "../components/Loader";
+import WindowsWrapper from "../components/widgets/WindowsWrapper";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -35,8 +36,8 @@ const Home = () => {
   return (
     <div className="w-full h-[100vh]">
       <Navbar />
-      <div className="flex flex-row justify-between">
-        <UserWidget />
+      <div>
+        <WindowsWrapper />
       </div>
     </div>
   );

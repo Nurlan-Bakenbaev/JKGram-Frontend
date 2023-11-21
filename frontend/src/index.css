@@ -5,3 +5,34 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+/* styles.css or your component's styles */
+.animated:hover {
+  animation: spin 8s linear infinite; /* Adjust the animation duration and timing function as needed */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.shake:hover {
+  animation: shake 1s ease-in-out; /* Adjust the animation duration and timing function as needed */
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25%,
+  75% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+}
+

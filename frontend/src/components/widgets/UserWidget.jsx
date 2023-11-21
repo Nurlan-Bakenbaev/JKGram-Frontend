@@ -4,7 +4,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { useSelector } from "react-redux";
-
+import EditIcon from "@mui/icons-material/Edit";
 const UserWidget = () => {
   const [social, setSocialInput] = useState("");
   const user = useSelector((state) => state.auth.user);
@@ -25,11 +25,11 @@ const UserWidget = () => {
   return (
     <div
       className={`${
-        mode ? "bg-slate-700" : " bg-slate-300 border-[1px] border-slate-400"
+        mode ? "bg-slate-700" : " bg-slate-200 border-[1px] border-slate-400"
       }rounded-xl p-5`}
     >
       <div className="flex flex-row items-center gap-2 py-2">
-        <div className="w-[40px] h-[40px] ">
+        <div className="w-[50px] h-[40px] ">
           <img
             className="object-cover rounded-full"
             src={`http://localhost:3001/assets/${picturePath}`}
@@ -78,15 +78,24 @@ const UserWidget = () => {
             <InstagramIcon sx={{ fontSize: "35px" }} />
             <div className="mx-3 flex flex-col">
               <p className="uppercase my-2 ">Instagram</p>
-              <input
-                name="socialNetwork"
-                value={social}
-                onChange={handleSocial}
-                className="outline-none 
+              <div className="flex relative">
+                <input
+                  id="socialNetwork"
+                  name="socialNetwork"
+                  value={social}
+                  onChange={handleSocial}
+                  className=" outline-none 
                 bg-transparent 
                 border-b text-white"
-                type="text"
-              />
+                  type="text"
+                />
+                <label
+                  className="absolute text-blue-500 bottom-0 py-3 hover:text-blue-200 right-0"
+                  htmlFor="socialNetwork"
+                >
+                  <EditIcon />
+                </label>
+              </div>
             </div>
           </div>
         </div>

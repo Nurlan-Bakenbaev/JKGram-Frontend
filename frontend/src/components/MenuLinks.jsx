@@ -26,7 +26,10 @@ const MenuLinks = () => {
           : "text-blue-900 relative bg-slate-300 h-[87.5vh] md:bg-transparent"
       } mb-3 md:mb-0`}
     >
-      <div onClick={() => dispatch(setMode())}>
+      <div
+        className="cursor-pointer transition-transform transform animated"
+        onClick={() => dispatch(setMode())}
+      >
         {mode ? (
           <LightModeIcon sx={{ color: "orange" }} />
         ) : (
@@ -34,13 +37,13 @@ const MenuLinks = () => {
         )}
       </div>
       <div className={` flex flex-col md:flex-row items-center gap-5`}>
-        <button>
+        <button className="shake transition  duration-300 hover:text-red-500 ease-in">
           <NotificationAddIcon />
         </button>
-        <button>
+        <button className="hover:text-green-400 transition duration-300 hover:scale-110">
           <ChatIcon />
         </button>
-        <button>
+        <button className="shake ">
           <HelpIcon />
         </button>
         <select
