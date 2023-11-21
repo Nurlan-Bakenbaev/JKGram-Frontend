@@ -20,8 +20,10 @@ const MenuLinks = () => {
 
   return (
     <div
-      className={`flex flex-col md:flex-row mt-10 md:mt-0 items-center gap-4 ${
-        mode ? "text-blue-400" : "text-blue-900"
+      className={`flex flex-col md:flex-row pt-10 md:pt-0 md:px-2 pb-10 md:pb-0 md:mt-0 items-center gap-4 ${
+        mode
+          ? "text-blue-400"
+          : "text-blue-900 relative bg-slate-300 h-[87.5vh] md:bg-transparent"
       } mb-3 md:mb-0`}
     >
       <div onClick={() => dispatch(setMode())}>
@@ -31,7 +33,7 @@ const MenuLinks = () => {
           <DarkModeIcon sx={{ color: "darkblue" }} />
         )}
       </div>
-      <div className={`flex flex-col md:flex-row items-center gap-5`}>
+      <div className={` flex flex-col md:flex-row items-center gap-5`}>
         <button>
           <NotificationAddIcon />
         </button>
@@ -51,9 +53,9 @@ const MenuLinks = () => {
         </select>
         <Link
           to={"/home"}
-          className={`${!mode && "hidden"} absolute bottom-8 md:hidden text-2xl
+          className=" absolute bottom-8 md:hidden text-2xl
               font-bold bg-clip-text text-transparent
-              bg-gradient-to-r from-blue-500 to-purple-500`}
+              bg-gradient-to-r from-blue-500 to-purple-500"
         >
           POSTGRAMM
         </Link>

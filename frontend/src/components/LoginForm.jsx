@@ -30,7 +30,7 @@ const LoginForm = ({ setForm }) => {
         loginData
       );
 
-      if (response.data && response.data.token) {
+      if (response.data) {
         localStorage.setItem("loginData", JSON.stringify(response.data));
         dispatch(setLogin(response.data));
         navigate("/home");

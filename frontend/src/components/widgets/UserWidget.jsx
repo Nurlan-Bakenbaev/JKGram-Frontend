@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const UserWidget = () => {
   const [social, setSocialInput] = useState("");
   const user = useSelector((state) => state.auth.user);
+  const mode = useSelector((state) => state.auth.mode);
   const {
     firstName,
     lastName,
@@ -22,11 +23,15 @@ const UserWidget = () => {
     setSocialInput(e.target.value);
   };
   return (
-    <div className="bg-slate-700 rounded-lg p-5">
-      <div className="flex flex-row items-center gap-2  py-2">
+    <div
+      className={`${
+        mode ? "bg-slate-700" : " bg-slate-300 border-[1px] border-slate-400"
+      }rounded-xl p-5`}
+    >
+      <div className="flex flex-row items-center gap-2 py-2">
         <div className="w-[40px] h-[40px] ">
           <img
-            className="object-cover  rounded-full"
+            className="object-cover rounded-full"
             src={`http://localhost:3001/assets/${picturePath}`}
             alt="user-photo"
           />

@@ -18,11 +18,11 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route
             path="/home"
-            element={isAuth ? <Home /> : <Navigate to={"/home"} />}
+            element={isAuth ? <Home /> : <Navigate to={"/"} />}
           />
           <Route
             path="/profile"
-            element={isAuth ? <Profile /> : <Navigate to={"/home"} />}
+            element={isAuth ? <Profile /> : <Navigate to={"/"} />}
           />
         </Routes>
       </div>
