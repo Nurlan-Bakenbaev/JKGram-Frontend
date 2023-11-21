@@ -10,25 +10,22 @@ const Home = () => {
   useEffect(() => {
     const initializeAuthentication = async () => {
       try {
-        console.log("Start authentication initialization");
         const loginData = localStorage.getItem("loginData");
         const loginParsed = JSON.parse(loginData);
         if (loginParsed) {
-          console.log("Dispatching setLogin");
+          console.log(loginParsed);
           await dispatch(
             setLogin({ user: loginParsed.user, token: loginParsed.token })
           );
-          console.log("setLogin completed");
-          setLoading(false);
         }
       } catch (error) {
-        console.error("Error during authentication initialization:", error);
+        console.error(error);
       }
     };
+    setLoading(false);
 
     initializeAuthentication();
-    console.log("End useEffect");
-  }, [dispatch, setLoading]);
+  }, []);
   if (loading) {
     return <Loader />;
   }

@@ -7,7 +7,6 @@ import { Navigate } from "react-router-dom";
 const App = () => {
   let mode = useSelector((state) => state.auth.mode);
   const isAuth = Boolean(useSelector((state) => state.auth.token));
-  
   return (
     <BrowserRouter>
       <div

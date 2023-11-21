@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const UserWidget = () => {
   const [social, setSocialInput] = useState("");
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   const {
     firstName,
     lastName,
@@ -37,7 +36,7 @@ const UserWidget = () => {
             <p className="w-full">{`${firstName} ${lastName}`}</p>
             <span>{friends.length} friends</span>
           </div>
-          <button className=" rounded-lg ml-8 hover:bg-slate-400">
+          <button className=" px-1 ml-8 hover:bg-slate-400">
             {user && (
               <PersonAddIcon sx={{ fontSize: "15px", color: "green" }} />
             )}
