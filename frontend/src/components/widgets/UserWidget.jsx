@@ -6,22 +6,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 const UserWidget = () => {
-  const [social, setSocialInput] = useState("");
+  const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.auth.user);
-  const mode = useSelector((state) => state.auth.mode);
-  const {
-    firstName,
-    lastName,
-    picturePath,
-    friends,
-    location,
-    occupation,
-    viewedProfile,
-    impressions,
-  } = user;
-  const handleSocial = (e) => {
-    setSocialInput(e.target.value);
+  const token = useSelector((state) => state.token);
+
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:5173/users/${userId}`);
   };
+
   return (
     <div
       className={`${
@@ -82,8 +74,6 @@ const UserWidget = () => {
                 <input
                   id="socialNetwork"
                   name="socialNetwork"
-                  value={social}
-                  onChange={handleSocial}
                   className=" outline-none 
                 bg-transparent 
                 border-b text-white"
