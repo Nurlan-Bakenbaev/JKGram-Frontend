@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const UserWidget = () => {
-  const [user ]
-  return (
-    <div>UserWidget</div>
-  )
-}
+  const [user, setUser] = useState(null);
+  return <div>UserWidget</div>;
+};
 
-export default UserWidget
+export default UserWidget;
