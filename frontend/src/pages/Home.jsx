@@ -9,7 +9,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-
+  const mode = useSelector((state) => state.auth.mode);
   useEffect(() => {
     const initializeAuthentication = async () => {
       try {
@@ -36,7 +36,7 @@ const Home = () => {
     <div className="w-full h-[100vh]">
       <Navbar />
       <div>
-        <UserWidget userId={user._id} />
+        <UserWidget userId={user._id} mode={mode} />
       </div>
     </div>
   );

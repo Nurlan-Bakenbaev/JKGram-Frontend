@@ -14,6 +14,11 @@ body {
   background-color: #1e293b;
   color: #e2e8f0;
 }
+.flex-gap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
 /* styles.css or your component's styles */
 .animated:hover {
