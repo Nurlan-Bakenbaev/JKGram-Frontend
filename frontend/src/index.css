@@ -6,6 +6,15 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.lightMode {
+  background-color: #f9fafb;
+  color: #111827;
+}
+.darkMode {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
 /* styles.css or your component's styles */
 .animated:hover {
   animation: spin 8s linear infinite; /* Adjust the animation duration and timing function as needed */
@@ -35,4 +44,3 @@ body {
     transform: translateX(2px);
   }
 }
-

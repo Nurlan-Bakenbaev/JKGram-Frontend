@@ -2,6 +2,7 @@ import MenuLinks from "./MenuLinks";
 import SearchIcon from "@mui/icons-material/Search";
 import MobileMenu from "./MobileMenu";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const mode = useSelector((state) => state.auth.mode);
   return (
@@ -12,13 +13,15 @@ const Navbar = () => {
     border-b-[1px] border-slate-500`}
     >
       <div className="flex gap-5 items-center">
-        <h2
-          className={`uppercase hidden md:block md:text-2xl
+        <Link to={"/home"}>
+          <h2
+            className={`uppercase hidden md:block md:text-2xl
               font-bold bg-clip-text text-transparent
               bg-gradient-to-r from-blue-500 to-purple-500`}
-        >
-          POSTGRAMM
-        </h2>
+          >
+            POSTGRAMM
+          </h2>
+        </Link>
 
         <form className="relative flex items-center">
           <input
