@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import { setLogin } from "../redux";
 import UserWidget from "../components/widgets/UserWidget";
 import Loader from "../components/Loader";
-import WindowsWrapper from "../components/widgets/WindowsWrapper";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const initializeAuthentication = async () => {
@@ -16,7 +16,6 @@ const Home = () => {
         const loginData = localStorage.getItem("loginData");
         const loginParsed = JSON.parse(loginData);
         if (loginParsed) {
-          console.log(loginParsed);
           await dispatch(setLogin(loginParsed));
         }
       } catch (error) {
@@ -37,7 +36,7 @@ const Home = () => {
     <div className="w-full h-[100vh]">
       <Navbar />
       <div>
-        <WindowsWrapper />
+        <UserWidget userId={user._id} />
       </div>
     </div>
   );

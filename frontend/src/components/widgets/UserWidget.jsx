@@ -1,29 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Loader from "../Loader";
-const UserWidget = () => {
-  const [loader, setLoader] = useState(true);
+
+const UserWidget = ({ userId }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-  const getUser = async () => {
-    const response = await fetch(`http://localhost:5173/users${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json;
-    console.log(data);
-    setUser(data);
-  };
   useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      setUser(data);
+    };
     getUser();
-  }, []);
-  const {} = user;
+  }, [token, userId]);
   if (!user) {
-    return <Loader />;
+    return null;
   }
-  return <div>UserWidget</div>;
+  const {
+    firstName,
+    lastName,
+    location,
+    occupation,
+    viewedProfile,
+    friends,
+    picturePath,
+  } = user;
+  return (
+    <aside className=" outline ">
+      <div>
+        <div>
+          <img
+            className="w-[35px] rounded-full"
+            src={`http://localhost:3001/assets/${picturePath}`}
+            alt="User-image"
+          />
+        </div>
+        <div>
+          <p >{firstName && lastName}</p>
+          <p> {friends}</p>
+        </div>
+      </div>
+    </aside>
+  );
 };
 
 export default UserWidget;
