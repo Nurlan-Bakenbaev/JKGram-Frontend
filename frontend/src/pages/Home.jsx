@@ -36,9 +36,9 @@ const Home = () => {
   return (
     <div className="w-full h-[100vh]">
       <Navbar />
-      <div className="p-2 border">
+      <div className="p-2 border flex ">
         <UserWidget userId={user._id} mode={mode} />
-        <MyPostWidget/>
+        <MyPostWidget />
       </div>
     </div>
   );

@@ -18,7 +18,6 @@ const MyPostWidget = () => {
   const { _id } = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
 
-
   const handlePost = async () => {
     const formData = new FormData();
     formData.append("userId", _id);
@@ -41,6 +40,13 @@ const MyPostWidget = () => {
   return (
     <div>
       <div>
+        <input
+          placeholder="What's on your mind?"
+          type="text"
+          onChange={(e) => setPost(e.target.value)}
+          value={post}
+          className="w-full bg-slate-200 px-3"
+        />
       </div>
     </div>
   );
