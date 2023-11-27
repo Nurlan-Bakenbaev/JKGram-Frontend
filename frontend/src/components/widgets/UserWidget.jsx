@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
+import InstagramIcon from "@mui/icons-material/Instagram";
 const UserWidget = ({ userId, mode }) => {
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
@@ -29,9 +29,10 @@ const UserWidget = ({ userId, mode }) => {
     viewedProfile,
     friends,
     picturePath,
+    impressions,
   } = user;
   return (
-    <aside className="">
+    <aside className=" w-[280px] drop-shadow-xl border-[0.8px] border-[#888787] p-4 m-2 bg-slate-700 rounded-md">
       <div className="flex flex-col">
         <div className="flex-gap ">
           <div>
@@ -50,7 +51,7 @@ const UserWidget = ({ userId, mode }) => {
             </p>
           </div>
         </div>
-        <hr className="my-5 " />
+        <hr className="my-2 " />
         <div>
           <span className="flex-gap m-2">
             <LocationOnIcon />
@@ -60,6 +61,27 @@ const UserWidget = ({ userId, mode }) => {
             <WorkIcon />
             <p>{occupation} </p>
           </span>
+        </div>
+        <hr className="my-2 " />
+        <div>
+          <span className="flex-gap py-2">
+            <p>Your profile is viewed</p>
+            <p>{viewedProfile}</p>
+          </span>
+          <span className="flex-gap">
+            <p>Your profile is liked</p>
+            <p>{impressions}</p>
+          </span>
+        </div>
+        <div>
+          <p>Social Profiles</p>
+          <div>
+            <InstagramIcon />
+            <div className="flex flex-col">
+              <p>Instagram</p>
+              <input className="" type="text" />
+            </div>
+          </div>
         </div>
       </div>
     </aside>

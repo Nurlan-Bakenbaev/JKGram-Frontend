@@ -10,23 +10,18 @@ const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const mode = useSelector((state) => state.auth.mode);
-  useEffect(() => {
-    const initializeAuthentication = async () => {
-      try {
-        const loginData = localStorage.getItem("loginData");
-        const loginParsed = JSON.parse(loginData);
-        if (loginParsed) {
-          await dispatch(setLogin(loginParsed));
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    initializeAuthentication();
-  }, [dispatch, setLoading]);
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch(`http://localhost:3001/users/${user._id}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      setUser(data);
+    };
+    getUser();
+  }, [token, userId]);
 
   if (loading) {
     return <Loader />;
@@ -35,7 +30,7 @@ const Home = () => {
   return (
     <div className="w-full h-[100vh]">
       <Navbar />
-      <div>
+      <div className="p-2 border">
         <UserWidget userId={user._id} mode={mode} />
       </div>
     </div>
