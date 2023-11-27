@@ -8,13 +8,16 @@ import GifBoxIcon from "@mui/icons-material/GifBox";
 import ImageIcon from "@mui/icons-material/Image";
 import MicIcon from "@mui/icons-material/Mic";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { setPosts } from "../../redux";
+
 const MyPostWidget = () => {
   const dispatch = useDispatch();
-  const [isImage, setImage] = useState(false);
+  const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
-  const { _id } = useSelector((state = state.auth.user));
+  const { _id } = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+
 
   const handlePost = async () => {
     const formData = new FormData();
@@ -24,8 +27,23 @@ const MyPostWidget = () => {
       formData.append("picture", image);
       formData.append("piturePath", image.name);
     }
+    const responce = fetch("http://localhost:3001/posts", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+    const posts = await responce.json();
+    dispatch(setPosts({ posts }));
+    setImage(null);
+    setPost("");
   };
-  return <div></div>;
+
+  return (
+    <div>
+      <div>
+      </div>
+    </div>
+  );
 };
 
 export default MyPostWidget;

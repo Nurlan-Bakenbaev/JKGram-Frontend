@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { setLogin } from "../redux";
 import UserWidget from "../components/widgets/UserWidget";
 import Loader from "../components/Loader";
+import MyPostWidget from "../components/widgets/MyPostWidget";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ const Home = () => {
       <Navbar />
       <div className="p-2 border">
         <UserWidget userId={user._id} mode={mode} />
+        <MyPostWidget/>
       </div>
     </div>
   );
