@@ -9,10 +9,12 @@ body {
 .lightMode {
   background-color: #f9fafb;
   color: #111827;
+  transition: 0.5s;
 }
 .darkMode {
   background-color: #1e293b;
   color: #e2e8f0;
+  transition: 0.5s;
 }
 .flex-gap {
   display: flex;
@@ -20,9 +22,8 @@ body {
   gap: 12px;
 }
 
-/* styles.css or your component's styles */
 .animated:hover {
-  animation: spin 8s linear infinite; /* Adjust the animation duration and timing function as needed */
+  animation: spin 8s linear infinite;
 }
 
 @keyframes spin {
@@ -34,7 +35,7 @@ body {
   }
 }
 .shake:hover {
-  animation: shake 1s ease-in-out; /* Adjust the animation duration and timing function as needed */
+  animation: shake 1s ease-in-out;
 }
 @keyframes shake {
   0%,

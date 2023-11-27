@@ -10,18 +10,23 @@ const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const mode = useSelector((state) => state.auth.mode);
-
   useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch(`http://localhost:3001/users/${user._id}`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await response.json();
-      setUser(data);
+    const initializeAuthentication = async () => {
+      try {
+        const loginData = localStorage.getItem("loginData");
+        const loginParsed = JSON.parse(loginData);
+        if (loginParsed) {
+          await dispatch(setLogin(loginParsed));
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
-    getUser();
-  }, [token, userId]);
+
+    initializeAuthentication();
+  }, [dispatch, setLoading]);
 
   if (loading) {
     return <Loader />;
