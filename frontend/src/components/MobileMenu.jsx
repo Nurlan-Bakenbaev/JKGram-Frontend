@@ -6,7 +6,7 @@ import MenuLinks from "./MenuLinks";
 const MobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="relative flex md:hidden ">
+    <div className="relative  flex md:hidden ">
       <div className="z-30">
         {isMenuOpen ? (
           <div onClick={() => setIsMenuOpen(false)}>
@@ -22,10 +22,10 @@ const MobileMenu = () => {
         {isMenuOpen && (
           <>
             <div
-              className={`fixed z-20 top-[80px] bottom-0
-          bg-slate-700 w-[250px] right-0 border-l border-slate-500 `}
+              className="fixed z-20 top-[80px] bottom-0
+          bg-slate-700 w-[250px] right-0 border-l border-slate-500 "
             >
-              <MenuLinks />
+              <MenuLinks setIsMenuOpen={setIsMenuOpen} />
             </div>
           </>
         )}

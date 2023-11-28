@@ -50,7 +50,7 @@ const MyPostWidget = ({ mode }) => {
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <div className="md:w-full px-1 flex-gap flex-col border border-slate-500 p-2 rounded-lg">
+    <div className="md:w-full  px-1 flex-gap flex-col border border-slate-500 p-2 rounded-lg">
       <div className=" w-full ">
         <input
           placeholder="Postgramm something ?"
@@ -84,24 +84,25 @@ const MyPostWidget = ({ mode }) => {
           </div>
         </div>
       )}
-      <div className="flex justify-between px-4 pt-2 border-t border-slate-400 w-full">
+      <div className="flex justify-between max-w-[320px] 
+        pt-1 px-3 border-t border-slate-400 w-full">
         <Buttons
           onclick={toggleDropZone}
           text={"Image"}
-          title={<ImageIcon sx={{ color: "lightblue" }} />}
+          icon={<ImageIcon sx={{ color: "lightblue" }} />}
         />
         <Buttons
           text={"Attachment"}
-          title={<AttachFileIcon sx={{ color: "lightblue" }} />}
+          icon={<AttachFileIcon sx={{ color: "lightblue" }} />}
         />
         <Buttons
           text={"Gif"}
-          title={<GifBoxIcon sx={{ color: "lightblue" }} />}
+          icon={<GifBoxIcon sx={{ color: "lightblue" }} />}
         />
         <Buttons
           onclick={handleDelete}
           text={"delete"}
-          title={<DeleteIcon sx={{ color: "purple" }} />}
+          icon={<DeleteIcon sx={{ color: "purple" }} />}
         />
       </div>
     </div>

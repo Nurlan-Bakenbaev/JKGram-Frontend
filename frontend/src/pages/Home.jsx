@@ -37,10 +37,10 @@ const Home = () => {
     <div className="w-full h-[100vh]">
       <Navbar />
       <div
-        className=" p-2 border 
+        className=" p-2 
       flex flex-col-reverse 
       md:flex-row 
-      md:justify-between"
+      md:justify-between gap-8"
       >
         <UserWidget userId={user._id} mode={mode} />
         <MyPostWidget mode={mode} />

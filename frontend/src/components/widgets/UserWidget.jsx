@@ -33,15 +33,15 @@ const UserWidget = ({ userId, mode }) => {
   } = user;
   return (
     <aside
-      className={` mx-auto md:w-[280px] w-full drop-shadow-xl border-[0.8px] border-[#888787] p-4 m-2 ${
-        mode ? "darkMode" : "lightMode"
-      } rounded-md`}
+      className={`mx-auto min-w-[280px] w-full 
+      drop-shadow-xl border-[0.8px] 
+       border-[#888787] p-4 m-2 ${mode ? "darkMode" : "lightMode"} rounded-md`}
     >
       <div className="flex flex-col">
         <div className="flex-gap ">
           <div>
             <img
-              className="w-[40px] rounded-full"
+              className="min-w-[35px] max-w-[40px] rounded-full"
               src={`http://localhost:3001/assets/${picturePath}`}
               alt="User-image"
             />
@@ -55,7 +55,7 @@ const UserWidget = ({ userId, mode }) => {
             </p>
           </div>
         </div>
-        <hr className="my-2 " />
+        <hr className="my-2  " />
         <div>
           <span className="flex-gap m-2">
             <LocationOnIcon sx={{ color: "red" }} />

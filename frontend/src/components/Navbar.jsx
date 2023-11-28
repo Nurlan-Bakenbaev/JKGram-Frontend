@@ -10,7 +10,7 @@ const Navbar = () => {
       className={`h-[80px]  
     flex justify-between items-center 
     px-2 md:px-10 ${!mode && "drop-shadow-xl"} 
-    border-b-[1px] border-slate-500`}
+    border-b-[1px] border-slate-500 `}
     >
       <div className="flex gap-5 items-center">
         <Link to={"/home"}>

@@ -7,7 +7,7 @@ import { setLogOut, setMode } from "../redux/index";
 import HelpIcon from "@mui/icons-material/Help";
 import { Link, useNavigate } from "react-router-dom";
 
-const MenuLinks = () => {
+const MenuLinks = ({ setIsMenuOpen }) => {
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
   const userNames = `${user?.firstName} ${user?.lastName}`;
@@ -17,18 +17,22 @@ const MenuLinks = () => {
     dispatch(setLogOut());
     navigate("/");
   };
+  const toggleMode = () => {
+    dispatch(setMode());
+    setIsMenuOpen(false);
+  };
 
   return (
     <div
-      className={`flex flex-col md:flex-row pt-10 md:pt-0 md:px-2 pb-10 md:pb-0 md:mt-0 items-center gap-4 ${
-        mode
-          ? "text-blue-400"
-          : "text-blue-900 relative bg-slate-300 h-[87.5vh] md:bg-transparent"
-      } mb-3 md:mb-0`}
+      className={`flex flex-col md:flex-row pt-10 
+      md:pt-0 md:px-2 pb-10 md:pb-0 md:mt-0 items-center gap-4 
+      ${
+        mode ? "text-blue-400" : "text-blue-900 bg-slate-300  md:bg-transparent"
+      } mb-3 md:mb-0 `}
     >
       <div
         className="cursor-pointer transition-transform transform animated"
-        onClick={() => dispatch(setMode())}
+        onClick={toggleMode}
       >
         {mode ? (
           <LightModeIcon sx={{ color: "orange" }} />
@@ -54,14 +58,6 @@ const MenuLinks = () => {
           <option>{userNames || "Default name"}</option>
           <option>Log out</option>
         </select>
-        <Link
-          to={"/home"}
-          className=" absolute bottom-8 md:hidden text-2xl
-              font-bold bg-clip-text text-transparent
-              bg-gradient-to-r from-blue-500 to-purple-500"
-        >
-          POSTGRAMM
-        </Link>
       </div>
     </div>
   );
