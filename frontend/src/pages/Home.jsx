@@ -43,7 +43,7 @@ const Home = () => {
       md:justify-between"
       >
         <UserWidget userId={user._id} mode={mode} />
-        <MyPostWidget />
+        <MyPostWidget mode={mode} />
       </div>
     </div>
   );

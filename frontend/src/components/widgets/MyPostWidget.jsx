@@ -1,7 +1,7 @@
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AttachmentIcon from "@mui/icons-material/Attachment";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import GifBoxIcon from "@mui/icons-material/GifBox";
@@ -11,9 +11,9 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { setPosts } from "../../redux";
 import Buttons from "../Buttons";
 
-const MyPostWidget = () => {
+const MyPostWidget = ({ mode }) => {
   const dispatch = useDispatch();
-  const [isImage, setIsImage] = useState(true);
+  const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const { _id } = useSelector((state) => state.auth.user);
@@ -45,6 +45,9 @@ const MyPostWidget = () => {
     setImage(null);
     setPost("");
   };
+  const toggleDropZone = () => {
+    setIsImage(!isImage);
+  };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div className="md:w-full px-1 flex-gap flex-col border border-slate-500 p-2 rounded-lg">
@@ -62,7 +65,7 @@ const MyPostWidget = () => {
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             {!isDragActive && (
-              <div className="flex flex-col text-center text-[12px] md:text-[16px]">
+              <div className="flex flex-col text-center text-[12px] lg:text-[16px]">
                 <p>
                   Drag and drop, or
                   <span className="text-blue-500 px-1">click to select</span>
@@ -83,24 +86,22 @@ const MyPostWidget = () => {
       )}
       <div className="flex justify-between px-4 pt-2 border-t border-slate-400 w-full">
         <Buttons
-          onclick={handleDelete}
-          text={"delete"}
-          title={<DeleteIcon sx={{ color: "red" }} />}
+          onclick={toggleDropZone}
+          text={"Image"}
+          title={<ImageIcon sx={{ color: "lightblue" }} />}
+        />
+        <Buttons
+          text={"Attachment"}
+          title={<AttachFileIcon sx={{ color: "lightblue" }} />}
+        />
+        <Buttons
+          text={"Gif"}
+          title={<GifBoxIcon sx={{ color: "lightblue" }} />}
         />
         <Buttons
           onclick={handleDelete}
           text={"delete"}
-          title={<DeleteIcon sx={{ color: "red" }} />}
-        />
-        <Buttons
-          onclick={handleDelete}
-          text={"delete"}
-          title={<DeleteIcon sx={{ color: "red" }} />}
-        />
-        <Buttons
-          onclick={handleDelete}
-          text={"delete"}
-          title={<DeleteIcon sx={{ color: "red" }} />}
+          title={<DeleteIcon sx={{ color: "purple" }} />}
         />
       </div>
     </div>
