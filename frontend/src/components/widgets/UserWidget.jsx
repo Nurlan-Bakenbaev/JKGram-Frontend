@@ -41,7 +41,7 @@ const UserWidget = ({ userId, mode }) => {
         <div className="flex-gap ">
           <div>
             <img
-              className="w-[45px] rounded-full"
+              className="min-w-[45px] rounded-full"
               src={`http://localhost:3001/assets/${picturePath}`}
               alt="User-image"
             />
@@ -67,7 +67,7 @@ const UserWidget = ({ userId, mode }) => {
           </span>
         </div>
         <hr className="my-2 " />
-        <div>
+        <div className="text-[12px]">
           <span className="flex-gap py-2">
             <p>Your profile is viewed</p>
             <p>{viewedProfile}</p>
