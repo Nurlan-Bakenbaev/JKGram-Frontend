@@ -41,6 +41,7 @@ const MyPostWidget = ({ mode }) => {
       dispatch(setPosts({ posts: responseData }));
       setImage(null);
       setPost("");
+      setIsImage(false)
     } catch (error) {
       console.error("Error while posting:", error);
     }
