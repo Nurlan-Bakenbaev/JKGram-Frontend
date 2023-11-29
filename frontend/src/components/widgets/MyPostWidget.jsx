@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import ImageIcon from "@mui/icons-material/Image";
-import MicIcon from "@mui/icons-material/Mic";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { setPosts } from "../../redux";
 import Buttons from "../Buttons";
 
@@ -18,28 +16,39 @@ const MyPostWidget = ({ mode }) => {
   const token = useSelector((state) => state.auth.token);
 
   const handlePost = async () => {
-    const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("description", post);
-    if (image) {
-      formData.append("picture", image);
-      formData.append("piturePath", image.name);
+    try {
+      const formData = new FormData();
+      formData.append("userId", _id);
+
+      formData.append("description", post);
+      if (image) {
+        formData.append("picture", image);
+        formData.append("piturePath", image.name);
+      }
+
+      const response = await fetch("http://localhost:3001/posts", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `HTTP error! Status: ${response.status}, Message: ${errorText}`
+        );
+      }
+      const responseData = await response.json();
+      dispatch(setPosts({ posts: responseData }));
+      setImage(null);
+      setPost("");
+    } catch (error) {
+      console.error("Error while posting:", error);
     }
-    const responce = fetch("http://localhost:3001/posts", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
-    console.log(formData);
-    const posts = await responce.json();
-    dispatch(setPosts({ posts }));
-    setImage(null);
-    setPost("");
   };
+
   const onDrop = useCallback((acceptedFiles) => {
     setImage(acceptedFiles);
   }, []);
-  console.log(image);
   const handleDelete = () => {
     setImage(null);
     setPost("");
