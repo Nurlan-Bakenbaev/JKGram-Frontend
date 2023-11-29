@@ -1,10 +1,8 @@
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import GifBoxIcon from "@mui/icons-material/GifBox";
+import SendIcon from "@mui/icons-material/Send";
 import ImageIcon from "@mui/icons-material/Image";
 import MicIcon from "@mui/icons-material/Mic";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -32,6 +30,7 @@ const MyPostWidget = ({ mode }) => {
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
     });
+    console.log(formData);
     const posts = await responce.json();
     dispatch(setPosts({ posts }));
     setImage(null);
@@ -50,7 +49,11 @@ const MyPostWidget = ({ mode }) => {
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <div className="md:w-full  px-1 flex-gap flex-col border border-slate-500 p-2 rounded-lg">
+    <div
+      className={`${
+        mode ? "dark" : "light"
+      } md:w-full drop-shadow-xl  px-1 mt-2  flex-gap flex-col border border-slate-500 p-2 rounded-lg`}
+    >
       <div className=" w-full ">
         <input
           placeholder="Postgramm something ?"
@@ -84,25 +87,25 @@ const MyPostWidget = ({ mode }) => {
           </div>
         </div>
       )}
-      <div className="flex justify-between max-w-[320px] 
-        pt-1 px-3 border-t border-slate-400 w-full">
+      <div
+        className="flex justify-between max-w-[320px] 
+        pt-1 px-3 mt-2  border-t border-slate-400 w-full py-2"
+      >
         <Buttons
           onclick={toggleDropZone}
           text={"Image"}
-          icon={<ImageIcon sx={{ color: "lightblue" }} />}
+          icon={<ImageIcon sx={{ color: "#0096FF" }} />}
         />
-        <Buttons
-          text={"Attachment"}
-          icon={<AttachFileIcon sx={{ color: "lightblue" }} />}
-        />
-        <Buttons
-          text={"Gif"}
-          icon={<GifBoxIcon sx={{ color: "lightblue" }} />}
-        />
+
         <Buttons
           onclick={handleDelete}
-          text={"delete"}
-          icon={<DeleteIcon sx={{ color: "purple" }} />}
+          text={"Delete"}
+          icon={<DeleteIcon sx={{ color: "red" }} />}
+        />
+        <Buttons
+          onclick={handlePost}
+          text={"Post"}
+          icon={<SendIcon sx={{ color: "#0096FF" }} />}
         />
       </div>
     </div>

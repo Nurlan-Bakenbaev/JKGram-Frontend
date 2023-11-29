@@ -11,23 +11,22 @@ const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const mode = useSelector((state) => state.auth.mode);
-  useEffect(() => {
-    const initializeAuthentication = async () => {
-      try {
-        const loginData = localStorage.getItem("loginData");
-        const loginParsed = JSON.parse(loginData);
-        if (loginParsed) {
-          await dispatch(setLogin(loginParsed));
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
+  const initializeAuthentication = async () => {
+    try {
+      const loginData = localStorage.getItem("loginData");
+      const loginParsed = JSON.parse(loginData);
+      await dispatch(setLogin(loginParsed));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     initializeAuthentication();
-  }, [dispatch, setLoading]);
+  }, []);
 
   if (loading) {
     return <Loader />;

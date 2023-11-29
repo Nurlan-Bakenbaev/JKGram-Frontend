@@ -3,10 +3,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuLinks from "./MenuLinks";
 
-const MobileMenu = () => {
+const MobileMenu = ({ mode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="relative  flex md:hidden ">
+    <div className="relative flex md:hidden ">
       <div className="z-30">
         {isMenuOpen ? (
           <div onClick={() => setIsMenuOpen(false)}>
@@ -22,8 +22,12 @@ const MobileMenu = () => {
         {isMenuOpen && (
           <>
             <div
-              className="fixed z-20 top-[80px] bottom-0
-          bg-slate-700 w-[250px] right-0 border-l border-slate-500 "
+              className={`${
+                mode ? "bg-[#262033]" : "bg-slate-300"
+              } fixed top-[80px]
+               bottom-0
+                w-[250px] right-0 border-l-[1px] border-slate-500
+            z-50`}
             >
               <MenuLinks setIsMenuOpen={setIsMenuOpen} />
             </div>

@@ -1,16 +1,20 @@
+import { useSelector } from "react-redux";
 const Buttons = ({ text, icon, onclick }) => {
+  const mode = useSelector((state) => state.auth.mode);
   return (
     <div>
       <button
-        className="text-sm md:text-sm  flex items-center
+        className={` drop-shadow-xl  md:text-sm  
+        flex items-center
         transition duration-500 
         hover:scale-110
-         border-slate-500  py-2
-          hover:text-blue-400 hover:border-b"
+         border-slate-500
+         rounded-md p-1 mt-1
+          hover:text-blue-600  gap-1 ${!mode && "border"}`}
         onClick={onclick}
       >
         {icon}
-        <span className="hidden md:flex">{text}</span>
+        <span className="hidde te md:flex">{text}</span>
       </button>
     </div>
   );

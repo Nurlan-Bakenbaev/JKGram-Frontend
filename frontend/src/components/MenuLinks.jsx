@@ -25,13 +25,16 @@ const MenuLinks = ({ setIsMenuOpen }) => {
   return (
     <div
       className={`flex flex-col md:flex-row pt-10 
-      md:pt-0 md:px-2 pb-10 md:pb-0 md:mt-0 items-center gap-4 
+      md:pt-0 md:px-2 pb-10 md:pb-0 md:mt-0 
+      items-center gap-4 
       ${
         mode ? "text-blue-400" : "text-blue-900 bg-slate-300  md:bg-transparent"
       } mb-3 md:mb-0 `}
     >
       <div
-        className="cursor-pointer transition-transform transform animated"
+        className="cursor-pointer 
+        transition-transform 
+        transform animated"
         onClick={toggleMode}
       >
         {mode ? (
@@ -40,11 +43,20 @@ const MenuLinks = ({ setIsMenuOpen }) => {
           <DarkModeIcon sx={{ color: "darkblue" }} />
         )}
       </div>
-      <div className={` flex flex-col md:flex-row items-center gap-5`}>
-        <button className="shake transition  duration-300 hover:text-red-500 ease-in">
+      <div
+        className={`flex flex-col md:flex-row 
+      items-center gap-5`}
+      >
+        <button
+          className="shake transition 
+         duration-300 hover:text-red-500 ease-in"
+        >
           <NotificationAddIcon />
         </button>
-        <button className="hover:text-green-400 transition duration-300 hover:scale-110">
+        <button
+          className="hover:text-green-400
+         transition duration-300 hover:scale-110"
+        >
           <ChatIcon />
         </button>
         <button className="shake ">

@@ -11,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <div
         className={`${
-          mode ? " bg-slate-800 text-white" : "bg-white text-black"
+          mode ? " bg-[#2a2536] text-white" : "bg-[#] text-black"
         } transition duration-300 ease-in`}
       >
         <Routes>
