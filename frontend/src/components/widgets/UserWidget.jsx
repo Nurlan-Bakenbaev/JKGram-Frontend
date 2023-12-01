@@ -50,7 +50,11 @@ const UserWidget = ({ userId, mode }) => {
             <div className="flex">
               <p className="pr-2">{firstName}</p> <p>{lastName}</p>
             </div>
-            <p className={`${mode ? "text-gray-400" : "text-gray-600"}`}>
+            <p
+              className={`text-xs ${
+                mode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               {friends.length} friends
             </p>
           </div>

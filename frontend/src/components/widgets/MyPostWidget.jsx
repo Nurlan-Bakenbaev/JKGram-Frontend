@@ -61,14 +61,14 @@ const MyPostWidget = ({ mode }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div
-      className={`${
-        mode ? "dark" : "light"
+      className={`drop-shadow-md ${
+        mode ? "dark" : "bg-white"
       } md:w-full px-1 mt-2  flex-gap flex-col border
-       border-slate-400 p-2 rounded-lg drop-shadow-2xl`}
+       border-slate-400 p-2 rounded-lg`}
     >
-      <div className=" w-full ">
+      <div className="w-full">
         <input
-          placeholder="Postgramm something ?"
+          placeholder="Wanna post something ?"
           type="text"
           onChange={(e) => setPost(e.target.value)}
           value={post}
@@ -76,7 +76,7 @@ const MyPostWidget = ({ mode }) => {
         />
       </div>
       {isImage && (
-        <div className="border border-blue-500 border-dashed p-2 w-full cursor-pointer">
+        <div className="border  border-blue-500 border-dashed p-2 w-full cursor-pointer">
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             {!isDragActive && (
@@ -101,7 +101,8 @@ const MyPostWidget = ({ mode }) => {
       )}
       <div
         className="flex justify-between max-w-[320px] 
-        pt-1 px-3 mt-2  border-t border-slate-400 w-full py-2"
+        pt-1 px-3 mt-2  border-t
+         border-slate-400 w-full py-2"
       >
         <Buttons
           onclick={toggleDropZone}
