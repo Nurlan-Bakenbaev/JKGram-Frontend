@@ -33,7 +33,7 @@ const UserWidget = ({ userId, mode }) => {
   } = user;
   return (
     <aside
-      className={` mx-auto min-w-[280px] w-full md:max-w-[320px]
+      className={` mx-auto min-w-[250px] w-full md:max-w-[320px]
       drop-shadow-xl border-[0.8px] 
        border-[#888787] p-4 m-2 ${mode ? "darkMode" : "lightMode"} rounded-md`}
     >

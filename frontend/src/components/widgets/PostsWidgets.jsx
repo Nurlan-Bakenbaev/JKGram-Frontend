@@ -4,19 +4,22 @@ import { setPosts } from "../../redux";
 import PostWidget from "./PostWidget";
 
 const PostsWidgets = ({ userId, isProfile = false }) => {
+  console.log(userId)
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.auth.posts);
+  const posts = useSelector((state) => state.auth.user.posts);
+ 
   const token = useSelector((state) => state.auth.token);
+
   const getPosts = async () => {
-    const response = fetch("http://localhost:3001/posts", {
+    const response = await fetch("http://localhost:3001/posts", {
       method: "GET",
       headers: { Authorization: `Bearer  ${token}` },
     });
-    const data = (await response).json();
+    const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
   const getUserPosts = async () => {
-    const response = fetch(`http://localhost:3001/posts/${userId}/posts`, {
+    const response = await fetch(`http://localhost:3001/posts/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer  ${token}` },
     });
@@ -30,7 +33,7 @@ const PostsWidgets = ({ userId, isProfile = false }) => {
   }, []); //eslint-disable-line
   return (
     <div>
-      {posts.map(
+      {posts?.map(
         ({
           _id,
           userId,
