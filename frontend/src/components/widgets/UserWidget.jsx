@@ -41,9 +41,9 @@ const UserWidget = ({ userId, mode }) => {
         <div className="flex-gap ">
           <div>
             <img
-              className="min-w-[35px] max-w-[40px] rounded-full"
+              className="min-w-[35px] text-xs max-w-[40px] rounded-full"
               src={`http://localhost:3001/assets/${picturePath}`}
-              alt="User-image"
+              alt="image"
             />
           </div>
           <div className="w-full">

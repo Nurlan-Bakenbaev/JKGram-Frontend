@@ -21,7 +21,7 @@ export const authSlice = createSlice({
       state.token = null;
       console.log("User is Log out");
     },
-    setFriens: (state, action) => {
+    setFriends: (state, action) => {
       if (state.user) {
         state.user.friens = action.payload.friends;
       } else {
@@ -40,6 +40,6 @@ export const authSlice = createSlice({
     },
   },
 });
-export const { setMode, setLogin, setLogOut, setPosts, setPost, setFriens } =
+export const { setMode, setLogin, setLogOut, setPosts, setPost, setFriends } =
   authSlice.actions;
 export default authSlice.reducer;

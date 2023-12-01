@@ -62,7 +62,8 @@ const MyPostWidget = ({ mode }) => {
     <div
       className={`${
         mode ? "dark" : "light"
-      } md:w-full drop-shadow-xl  px-1 mt-2  flex-gap flex-col border border-slate-500 p-2 rounded-lg`}
+      } md:w-full px-1 mt-2  flex-gap flex-col border
+       border-slate-400 p-2 rounded-lg drop-shadow-2xl`}
     >
       <div className=" w-full ">
         <input
