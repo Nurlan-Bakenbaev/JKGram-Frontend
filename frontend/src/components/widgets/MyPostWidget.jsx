@@ -41,7 +41,7 @@ const MyPostWidget = ({ mode }) => {
       dispatch(setPosts({ posts: responseData }));
       setImage(null);
       setPost("");
-      setIsImage(false)
+      setIsImage(false);
     } catch (error) {
       console.error("Error while posting:", error);
     }
@@ -53,6 +53,7 @@ const MyPostWidget = ({ mode }) => {
   const handleDelete = () => {
     setImage(null);
     setPost("");
+    setIsImage(false);
   };
   const toggleDropZone = () => {
     setIsImage(!isImage);
@@ -71,7 +72,7 @@ const MyPostWidget = ({ mode }) => {
           type="text"
           onChange={(e) => setPost(e.target.value)}
           value={post}
-          className="w-full outline-none text-black py-2 bg-slate-200 px-5 rounded-lg"
+          className="w-full text-xs md:text-md outline-none text-black py-2 bg-slate-200 px-5 rounded-lg"
         />
       </div>
       {isImage && (

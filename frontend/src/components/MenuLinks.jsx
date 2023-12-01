@@ -65,9 +65,11 @@ const MenuLinks = ({ setIsMenuOpen }) => {
         <select
           onChange={(e) => e.target.value === "Log out" && handleLogOut()}
           id="userName"
-          className="text-black rounded-lg p-2 outline "
+          className="text-black bg-slate-300 text-sm rounded-lg p-2 outline "
         >
-          <option>{userNames || "Default name"}</option>
+          <option className="text-xs md:text-md">
+            {userNames || "Default name"}
+          </option>
           <option>Log out</option>
         </select>
       </div>

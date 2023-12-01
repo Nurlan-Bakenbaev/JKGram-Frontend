@@ -33,7 +33,7 @@ const UserWidget = ({ userId, mode }) => {
   } = user;
   return (
     <aside
-      className={`mx-auto min-w-[280px] w-full 
+      className={` mx-auto min-w-[280px] w-full md:max-w-[320px]
       drop-shadow-xl border-[0.8px] 
        border-[#888787] p-4 m-2 ${mode ? "darkMode" : "lightMode"} rounded-md`}
     >
@@ -56,7 +56,7 @@ const UserWidget = ({ userId, mode }) => {
           </div>
         </div>
         <hr className="my-2  " />
-        <div>
+        <div className="text-xs md:text-md">
           <span className="flex-gap m-2">
             <LocationOnIcon sx={{ color: "red" }} />
             <p>{location} </p>

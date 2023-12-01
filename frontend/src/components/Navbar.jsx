@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import MobileMenu from "./MobileMenu";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const mode = useSelector((state) => state.auth.mode);
   return (
@@ -26,7 +27,8 @@ const Navbar = () => {
         <form className="relative flex items-center">
           <input
             placeholder="Search..."
-            className="p-1 pl-3 outline-none
+            className="p-1 pl-3 text-[12px] 
+            md:text-md outline-none
              text-black rounded"
             type="text"
           />

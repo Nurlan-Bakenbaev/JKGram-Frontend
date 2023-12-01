@@ -14,7 +14,7 @@ const Buttons = ({ text, icon, onclick }) => {
         onClick={onclick}
       >
         {icon}
-        <span className="hidde te md:flex">{text}</span>
+        <span className="text-xs md:flex">{text}</span>
       </button>
     </div>
   );
