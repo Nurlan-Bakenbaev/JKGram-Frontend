@@ -10,7 +10,7 @@ const Home = () => {
   const { _id, picturePath } = useSelector((state) => state.auth.user);
   const mode = useSelector((state) => state.auth.mode);
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full min-h-[100vh] max-h-full">
       <Navbar />
       <div
         className=" p-2 
@@ -21,7 +21,7 @@ const Home = () => {
         <div>
           <UserWidget userId={user._id} mode={mode} />
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col drop-shadow-md w-full justify-center items-center">
           <MyPostWidget mode={mode} />
           <PostsWidgets userId={_id} />
         </div>

@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
 
       minlength: 6,
-      maxlength: 50,
+      maxlength: 100,
     },
     picturePath: {
       type: String,

@@ -46,6 +46,7 @@ const Register = ({ setForm }) => {
         setForm("login");
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("Error during registration:", error);
     }
   };
@@ -53,12 +54,18 @@ const Register = ({ setForm }) => {
     return <Loader />;
   } else
     return (
-      <div className=" flex items-center
-       justify-center">
-        <div className="max-w-[300px] md:min-w-[500px] 
-        p-4 bg-slate-300 rounded-md ">
-          <h2 className="text-3xl text-center 
-           text-slate-700 mb-6">
+      <div
+        className=" flex items-center
+       justify-center"
+      >
+        <div
+          className="max-w-[300px] md:min-w-[500px] 
+        p-4 bg-slate-300 rounded-md "
+        >
+          <h2
+            className="text-3xl text-center 
+           text-slate-700 mb-6"
+          >
             register
           </h2>
           <form

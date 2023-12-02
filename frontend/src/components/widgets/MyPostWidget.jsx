@@ -23,7 +23,7 @@ const MyPostWidget = ({ mode }) => {
       formData.append("description", post);
       if (image) {
         formData.append("picture", image);
-        formData.append("piturePath", image.name);
+        formData.append("picturePath", image.path);
       }
 
       const response = await fetch("http://localhost:3001/posts", {
@@ -48,7 +48,8 @@ const MyPostWidget = ({ mode }) => {
   };
 
   const onDrop = useCallback((acceptedFiles) => {
-    setImage(acceptedFiles);
+    const firstImage = acceptedFiles[0];
+    setImage(firstImage);
   }, []);
   const handleDelete = () => {
     setImage(null);
@@ -61,10 +62,10 @@ const MyPostWidget = ({ mode }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div
-      className={`drop-shadow-md ${
+      className={`md:max-w-[520px] w-full drop-shadow-sm ${
         mode ? "dark" : "bg-white"
-      } md:w-full px-1 mt-2  flex-gap flex-col border
-       border-slate-400 p-2 rounded-lg`}
+      } md:w-full px-2   flex-gap flex-col border
+       border-slate-300 p-2 rounded-lg`}
     >
       <div className="w-full">
         <input
@@ -90,7 +91,7 @@ const MyPostWidget = ({ mode }) => {
                   <p>
                     Selected image:
                     <span className="text-red-500 px-1 font-extrabold">
-                      {image[0].name}
+                      {image.path}
                     </span>
                   </p>
                 )}

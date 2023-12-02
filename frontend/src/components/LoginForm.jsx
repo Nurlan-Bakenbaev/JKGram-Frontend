@@ -41,8 +41,8 @@ const LoginForm = ({ setForm }) => {
     }
   };
   return (
-    <div>
-      <div className="w-[300px] md:w-[500px] h-[55vh] p-6 bg-slate-300 rounded-md ">
+    <div className="relative">
+      <div className="w-[300px] md:w-[500px]  p-6 bg-slate-300 rounded-md ">
         <h2 className="text-2xl md:text-4xl  text-center  text-gray-800 mb-6">
           login
         </h2>
@@ -56,7 +56,7 @@ const LoginForm = ({ setForm }) => {
             className=" outline-none form-input px-3 py-2 mb-3  rounded text-black"
           />
           {errMsg && (
-            <p className="text-red-500  text-center">
+            <p className="text-red-500  transition duration-200 ease-in text-center">
               Email or Password is invalid
             </p>
           )}
@@ -89,7 +89,7 @@ const LoginForm = ({ setForm }) => {
 
         <div
           onClick={() => setForm("register")}
-          className=" text-blue-500 mt-4 cursor-pointer text-right text-sm"
+          className=" text-blue-500 mt-4  cursor-pointer text-right text-sm"
         >
           Create an Account ?
         </div>

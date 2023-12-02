@@ -4,26 +4,32 @@ import { setPosts } from "../../redux";
 import PostWidget from "./PostWidget";
 
 const PostsWidgets = ({ userId, isProfile = false }) => {
-  console.log(userId)
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.auth.user.posts);
- 
-  const token = useSelector((state) => state.auth.token);
+  const posts = useSelector((state) => state.auth.posts);
 
+  const token = useSelector((state) => state.auth.token);
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
-      method: "GET",
-      headers: { Authorization: `Bearer  ${token}` },
-    });
-    const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    try {
+      const response = await fetch("http://localhost:3001/post", {
+        method: "GET",
+        headers: { Authorization: `Bearer  ${token}` },
+      });
+
+      const data = await response.json();
+      dispatch(setPosts({ posts: data }));
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   const getUserPosts = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${userId}`, {
+    const response = await fetch(`http://localhost:3001/post/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer  ${token}` },
     });
+
     const data = await response.json();
+
     dispatch(setPosts({ posts: data }));
   };
   useEffect(() => {
