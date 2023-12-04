@@ -4,7 +4,7 @@ const Buttons = ({ text, icon, onclick }) => {
   return (
     <div>
       <button
-        className={` md:text-sm  
+        className={` outline-none md:text-sm  
         flex items-center
         transition duration-500 
         hover:scale-110

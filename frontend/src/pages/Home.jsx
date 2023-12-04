@@ -7,26 +7,31 @@ import PostsWidgets from "../components/widgets/PostsWidgets";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
-  const { _id, picturePath } = useSelector((state) => state.auth.user);
+  const { _id } = useSelector((state) => state.auth.user);
   const mode = useSelector((state) => state.auth.mode);
   return (
     <div className="w-full min-h-[100vh] max-h-full">
       <Navbar />
-      <div
-        className=" p-2 
+      <div className="w-[90%] md:w-full lg:w-[80%] mx-auto">
+        <div
+          className="
       flex flex-col-reverse 
-      md:flex-row md:items-baseline
-      md:justify-between gap-8"
-      >
-        <div>
-          <UserWidget userId={user._id} mode={mode} />
-        </div>
-        <div className="flex flex-col drop-shadow-md w-full justify-center items-center">
-          <MyPostWidget mode={mode} />
-          <PostsWidgets userId={_id} />
-        </div>
-        <div>
-          <Friends />
+      md:flex-row md:items-start
+      md:justify-between gap-8 mt-10 px-3"
+        >
+          <div>
+            <UserWidget userId={user._id} mode={mode} />
+          </div>
+          <div
+            className="flex flex-col drop-shadow-md
+           w-full justify-center items-center"
+          >
+            <MyPostWidget mode={mode} />
+            <PostsWidgets userId={_id} />
+          </div>
+          <div>
+            <Friends />
+          </div>
         </div>
       </div>
     </div>

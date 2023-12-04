@@ -13,7 +13,7 @@ const Navbar = () => {
     px-2 md:px-10 
     border-b-[1px] border-slate-500 `}
     >
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-3 items-center">
         <Link to={"/home"}>
           <h2
             className={`uppercase hidden md:block md:text-2xl

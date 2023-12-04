@@ -3,21 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
-const UserWidget = ({ userId, mode }) => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-  const token = useSelector((state) => state.auth.token);
-  useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch(`http://localhost:3001/users/${userId}`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await response.json();
-      setUser(data);
-    };
-    getUser();
-  }, [token, userId]);
+const UserWidget = ({ mode }) => {
+  const user = useSelector((state) => state.auth.user);
   if (!user) {
     return null;
   }
@@ -31,11 +18,12 @@ const UserWidget = ({ userId, mode }) => {
     picturePath,
     impressions,
   } = user;
+
   return (
     <aside
       className={` mx-auto min-w-[250px] w-full md:max-w-[320px]
       drop-shadow-xl border-[0.8px] 
-       border-[#888787] p-4 m-2 ${mode ? "darkMode" : "lightMode"} rounded-md`}
+       border-[#888787] p-4  ${mode ? "darkMode" : "lightMode"} rounded-md`}
     >
       <div className="flex flex-col">
         <div className="flex-gap ">
@@ -51,9 +39,7 @@ const UserWidget = ({ userId, mode }) => {
               <p className="pr-2">{firstName}</p> <p>{lastName}</p>
             </div>
             <p
-              className={`text-xs ${
-                mode ? "text-gray-400" : "text-gray-600"
-              }`}
+              className={`text-xs ${mode ? "text-gray-400" : "text-gray-600"}`}
             >
               {friends.length} friends
             </p>

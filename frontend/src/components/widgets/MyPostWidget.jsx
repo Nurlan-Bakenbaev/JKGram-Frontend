@@ -103,7 +103,7 @@ const MyPostWidget = ({ mode }) => {
       <div
         className="flex justify-between max-w-[320px] 
         pt-1 px-3 mt-2  border-t
-         border-slate-400 w-full py-2"
+         border-slate-400 w-full  py-2"
       >
         <Buttons
           onclick={toggleDropZone}
