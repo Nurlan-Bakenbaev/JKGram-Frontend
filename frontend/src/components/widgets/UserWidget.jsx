@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
+import { Divider } from "@mui/material";
 const UserWidget = ({ mode }) => {
   const user = useSelector((state) => state.auth.user);
   if (!user) {
@@ -21,9 +22,11 @@ const UserWidget = ({ mode }) => {
 
   return (
     <aside
-      className={` mx-auto min-w-[250px] w-full md:max-w-[320px]
+      className={` ${
+        mode && "bg-[#3a3349]"
+      } mx-auto min-w-[250px] w-full md:max-w-[320px]
       drop-shadow-xl border-[0.8px] 
-       border-[#888787] p-4  ${mode ? "darkMode" : "lightMode"} rounded-md`}
+      border-[#4f4f4fb0] p-4 rounded-md`}
     >
       <div className="flex flex-col">
         <div className="flex-gap ">
@@ -35,8 +38,8 @@ const UserWidget = ({ mode }) => {
             />
           </div>
           <div className="w-full">
-            <div className="flex">
-              <p className="pr-2">{firstName}</p> <p>{lastName}</p>
+            <div className="flex ">
+              <p>{`${firstName}  ${lastName}`}</p>
             </div>
             <p
               className={`text-xs ${mode ? "text-gray-400" : "text-gray-600"}`}
@@ -45,7 +48,7 @@ const UserWidget = ({ mode }) => {
             </p>
           </div>
         </div>
-        <hr className="my-2  " />
+        <Divider sx={{ background: "#2a2536", margin: "8px" }} />
         <div className="text-xs md:text-md">
           <span className="flex-gap m-2">
             <LocationOnIcon sx={{ color: "red" }} />
@@ -56,7 +59,8 @@ const UserWidget = ({ mode }) => {
             <p>{occupation} </p>
           </span>
         </div>
-        <hr className="my-2 " />
+        <Divider sx={{ background: "#2a2536", margin: "5px" }} />
+
         <div className="text-[12px]">
           <span className="flex-gap py-2">
             <p>Your profile is viewed</p>

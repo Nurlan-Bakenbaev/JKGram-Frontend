@@ -55,12 +55,12 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
             navigate(0);
           }}
         >
-          <p className="hover:text-blue-600 text-xs cursor-pointer">{name} </p>
+          <p className="hover:text-blue-600 text-xs cursor-pointer border-b border-amber-500">{name} </p>
           <p className="text-slate-500 text-[12px]">{subtitle} </p>
         </div>
       </div>
       <div
-        className="cursor-pointer hover:bg-slate-300 "
+        className="cursor-pointer hover:bg-indigo-400 p-1 rounded-full "
         onClick={() => patchFriend()}
       >
         <div className={_id === friendId && "hidden"}>

@@ -59,7 +59,7 @@ const MenuLinks = ({ setIsMenuOpen }) => {
         >
           <ChatIcon />
         </button>
-        <button className="shake ">
+        <button className="shake hover:text-[#4f46e5] ">
           <HelpIcon />
         </button>
         <select

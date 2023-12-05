@@ -71,3 +71,50 @@ export const likePost = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+//Comments
+
+// In your controllers/post.js file
+export const commentPost = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const { comment } = req.body;
+    const userId = req.user._id; // Assuming you have userId in the token
+
+    // Find the post by its ID
+    const post = await Post.findById(postId);
+
+    // If the post doesn't exist, return an error
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    if (!comment || comment.trim() === "") {
+      return res.status(400).json({ error: "Comment cannot be empty" });
+    }
+
+    // Find user by ID
+    const user = await User.findById(userId);
+
+    // If the user doesn't exist, return an error
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Add the comment to the post with user's first and last name
+    post.comments.push({
+      userId,
+      comment,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
+
+    // Save the updated post
+    const updatedPost = await post.save();
+
+    // Return the updated post
+    res.json(updatedPost);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

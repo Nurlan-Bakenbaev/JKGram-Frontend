@@ -62,10 +62,10 @@ const MyPostWidget = ({ mode }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div
-      className={`md:max-w-[520px] w-full drop-shadow-sm ${
-        mode ? "dark" : "bg-white"
-      } md:w-full px-2   flex-gap flex-col border
-       border-slate-300 p-2 rounded-lg`}
+      className={`md:max-w-[520px] w-full drop-shadow-md ${
+        mode ? "bg-[#3a3349]" : "bg-white"
+      } md:w-full px-5 py-4  flex-gap flex-col border
+      border-[#4f4f4fb7] p-2 rounded-lg`}
     >
       <div className="w-full">
         <input
@@ -77,7 +77,7 @@ const MyPostWidget = ({ mode }) => {
         />
       </div>
       {isImage && (
-        <div className="border  border-blue-500 border-dashed p-2 w-full cursor-pointer">
+        <div className="border border-blue-500 border-dashed p-2 w-full cursor-pointer">
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             {!isDragActive && (

@@ -1,13 +1,17 @@
 import { useState } from "react";
 import Friends from "../Friends";
 import { useSelector, useDispatch } from "react-redux";
-import { setPost } from "../../redux";
+import { setPost, deleteFeedPost } from "../../redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Badge from "@mui/material/Badge";
+import SendIcon from "@mui/icons-material/Send";
 import {
   ChatBubbleOutline,
   FavoriteBorderOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
+import { Divider } from "@mui/material";
 const PostWidget = ({
   postId,
   postUserId,
@@ -22,10 +26,50 @@ const PostWidget = ({
   const [isComment, setIsComment] = useState(false);
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
-  const loggedInuserId = useSelector((state) => state.auth.user._id);
-  const isLiked = Boolean(likes[loggedInuserId]);
+  const user = useSelector((state) => state.auth.user);
+  const isLiked = Boolean(likes[user._id]);
   const commentCount = Object.keys(comments).length;
   const likeCount = Object.keys(likes).length;
+  const [commentInput, setCommentInput] = useState("");
+
+  //COMMENTS
+  const handleCommentInputChange = (e) => {
+    setCommentInput(e.target.value);
+  };
+  console.log(commentInput);
+
+  const submitComment = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/post/${postId}/comment`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+            commentInput,
+            user.firstName,
+            user.lastName,
+            user._id
+          ),
+        }
+      );
+      console.log(response);
+      if (response.ok) {
+        const updatedPost = await response.json();
+        dispatch(setPost({ post: updatedPost }));
+        setCommentInput("");
+      } else {
+        console.error("Failed to submit comment");
+      }
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+    }
+  };
+
+  //LIKE UNLIKE
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/post/${postId}/like`, {
       method: "PATCH",
@@ -33,17 +77,21 @@ const PostWidget = ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId: loggedInuserId }),
+      body: JSON.stringify({ userId: user._id }),
     });
     const updatedPost = await response.json();
 
     dispatch(setPost({ post: updatedPost }));
   };
+  const handleDeletePost = (postId) => {
+    dispatch(deleteFeedPost({ postId }));
+  };
+  const mode = useSelector((state) => state.auth.mode);
   return (
     <div
-      className=" drop-shadow-md px-4 py-4 
+      className={`${mode && "bg-[#3a3349]"} drop-shadow-md px-4 py-4 
     md:max-w-[520px] lg-w-full min-w-[220px]  border-[1px]
-     border-slate-300 rounded-lg  mt-5"
+    border-[#4f4f4fb4] rounded-lg mb-8 mt-5`}
     >
       <Friends
         friendId={postUserId}
@@ -59,38 +107,79 @@ const PostWidget = ({
           alt="Post"
         />
       )}
-      <hr className="bg-blue-300 h-[2px] mt-3 mb-1 rounded-xl " />
+      <Divider sx={{ background: "#4f4f4fb4", margin: "15px 0 10px 0" }} />
       <div className="flex justify-between flex-row ">
         <div className="flex w-full justify-between ">
           <div className="flex gap-5">
-            <div className="flex flex-row  hover:bg-slate-300 p-1 rounded-md">
-              <button onClick={patchLike}>
-                {isLiked ? <FavoriteIcon /> : <FavoriteBorderOutlined />}
+            <div className="relative flex flex-row  hover:bg-slate-300 p-1 rounded-md">
+              <button className="mx-1 " onClick={patchLike}>
+                <Badge badgeContent={likeCount} color="secondary">
+                  {isLiked ? (
+                    <FavoriteIcon sx={{ color: "red" }} />
+                  ) : (
+                    <FavoriteBorderOutlined sx={{ color: "red" }} />
+                  )}
+                </Badge>
               </button>
-              <p className="text-xs">{likeCount}</p>
             </div>
-            <div className="flex flex-row  hover:bg-slate-300 p-1 rounded-md">
-              <button className="outline-none" onClick={() => setIsComment(!isComment)}>
-                <ChatBubbleOutline />
+            <div className="relative flex flex-row  hover:bg-slate-300 p-1 rounded-md">
+              <button
+                className=" outline-none mx-1"
+                onClick={() => setIsComment(!isComment)}
+              >
+                <Badge badgeContent={comments.length} color="secondary">
+                  <ChatBubbleOutline sx={{ color: "green" }} />
+                </Badge>
               </button>
-              <p className="text-xs">{comments.length}</p>
             </div>
           </div>
-
-          <button className="flex flex-row  hover:bg-slate-300 p-1 rounded-md">
-            <ShareOutlined />
-          </button>
+          <div className="flex-gap">
+            <button className="flex flex-row  hover:bg-slate-300 p-1 rounded-full">
+              <ShareOutlined sx={{ color: "#4f46e5" }} />
+            </button>
+            <button
+              className="p-1 hover:bg-red-500 rounded-full"
+              onClick={() => handleDeletePost(postId)}
+            >
+              <DeleteIcon sx={{ color: "#3b82f6" }} />
+            </button>
+          </div>
         </div>
       </div>
       {isComment && (
-        <div className=" h-[15vh] overflow-y-auto">
-          {comments.map((comment, ind) => (
-            <div className="odd:bg-green-800 rounded-lg "
-             key={`${name}-${ind}`}>
-              <p className="pl-4 py-1 text-[12px] ">{comment}</p>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className=" h-[15vh] overflow-y-auto">
+            {comments === 0 && (
+              <div className="flex items-center  justify-center w-full h-full">
+                <p className="text-xs">NO COMMENTS</p>
+              </div>
+            )}
+            {comments?.map((comment, index) => (
+              <div className="rounded-lg " key={index}>
+                <p className="pl-4 py-1 text-sm">{comment}</p>
+              </div>
+            ))}
+          </div>
+          <form className="relative">
+            <input
+              value={commentInput}
+              onChange={handleCommentInputChange}
+              className=" text-black  outline-none  mt-2 text-sm w-full rounded-lg px-4 py-2"
+              type="text"
+              placeholder="Leave a comment"
+            />
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                submitComment();
+              }}
+              className="absolute bottom-1 right-1"
+            >
+              <SendIcon sx={{ color: "blue" }} />
+            </button>
+          </form>
+        </>
       )}
     </div>
   );

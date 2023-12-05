@@ -22,11 +22,11 @@ const MobileMenu = ({ mode }) => {
         {isMenuOpen && (
           <>
             <div
-              className={`${
-                mode ? "bg-[#262033]" : "bg-slate-300"
-              } fixed top-[80px]
+              className={`fixed top-[80px] ${
+                mode ? "bg-slate-800" : "bg-slate-300"
+              } 
                bottom-0
-                w-[250px] right-0 border-l-[1px] border-slate-500
+                w-[250px] h-[100vh] right-0 border-[1px] border-slate-500
             z-50`}
             >
               <MenuLinks setIsMenuOpen={setIsMenuOpen} />

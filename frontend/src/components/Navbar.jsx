@@ -8,10 +8,12 @@ const Navbar = () => {
   const mode = useSelector((state) => state.auth.mode);
   return (
     <nav
-      className={`h-[80px] 
+      className={` drop-shadow-lg h-[80px] w-full fixed top-0 ${
+        mode ? "bg-[#2a2536] border-[#4f4f4f]" : "bg-white border-slate-300"
+      } z-50  
     flex justify-between items-center 
     px-2 md:px-10 
-    border-b-[1px] border-slate-500 `}
+    border-b-[1px]  `}
     >
       <div className="flex gap-3 items-center">
         <Link to={"/home"}>

@@ -17,7 +17,7 @@ const Home = () => {
           className="
       flex flex-col-reverse 
       md:flex-row md:items-start
-      md:justify-between gap-8 mt-10 px-3"
+      md:justify-between gap-8  px-3 pt-[120px]"
         >
           <div>
             <UserWidget userId={user._id} mode={mode} />

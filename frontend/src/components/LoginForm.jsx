@@ -1,9 +1,10 @@
-import {  useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../redux";
+import { Alert } from "@mui/material";
 const LoginForm = ({ setForm }) => {
   const [loginData, setLoginData] = useState({
     email: "",
@@ -56,9 +57,7 @@ const LoginForm = ({ setForm }) => {
             className=" outline-none form-input px-3 py-2 mb-3  rounded text-black"
           />
           {errMsg && (
-            <p className="text-red-500  transition duration-200 ease-in text-center">
-              Email or Password is invalid
-            </p>
+            <Alert severity="error">Email or password is incorrect.</Alert>
           )}
           <div className="relative flex items-center">
             <input
