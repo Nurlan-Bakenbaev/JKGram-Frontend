@@ -34,7 +34,6 @@ const PostWidget = ({
   const commentCount = Object.keys(comments).length;
   const likeCount = Object.keys(likes).length;
   const [commentInput, setCommentInput] = useState("");
-  console.log(comments);
 
   const handleCommentInputChange = (e) => {
     setCommentInput(e.target.value);
@@ -128,12 +127,12 @@ const PostWidget = ({
   };
   return (
     <div
-      className={`${mode && "bg-[#3a3349]"} drop-shadow-md px-4 py-4 
+      className={`${mode && "bg-[#3a3349] "} drop-shadow-md px-4 py-4 
     md:max-w-[520px] lg-w-full min-w-[220px]  border-[1px]
     border-[#4f4f4fb4] rounded-lg mb-8 mt-5`}
     >
       <Friends
-        friendId={postUserId}
+        postUserId={postUserId}
         name={name}
         subtitle={location}
         userPicturePath={userPicturePath}
@@ -205,10 +204,10 @@ const PostWidget = ({
                 <div className="px-3 p-2 rounded-xl bg-green-700">
                   <p className="pl-3 pr-4 text-sm md:text-md flex justify-between">
                     <span>{comment}</span>{" "}
-                    <span className="hover:bg-slate-800 p-1 rounded-lg">
+                    <span className="hover:bg-slate-800 flex justify-center p-1 w-[22px] h-[22px] rounded-full">
                       <DeleteIcon
                         onClick={() => handleDeleteComment(_id)}
-                        sx={{ color: "red" }}
+                        sx={{ color: "red", fontSize: "18px" }}
                       />
                     </span>
                   </p>

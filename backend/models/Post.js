@@ -39,7 +39,7 @@ const postSchema = new mongoose.Schema(
       of: Boolean,
     },
     comments: {
-      _id: mongoose.Schema.Types.ObjectId,
+      commentId: mongoose.Schema.Types.ObjectId,
       type: [commentSchema],
       default: [],
     },

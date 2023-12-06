@@ -5,6 +5,7 @@ import MyPostWidget from "../components/widgets/MyPostWidget";
 import Friends from "../components/Friends";
 import PostsWidgets from "../components/widgets/PostsWidgets";
 
+
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
   const { _id } = useSelector((state) => state.auth.user);

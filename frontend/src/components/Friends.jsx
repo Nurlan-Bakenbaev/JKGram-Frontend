@@ -6,36 +6,37 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "../redux";
-const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
+const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { _id } = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth);
   const { friends } = useSelector((state) => state.auth.user);
-  const isFriend = friends.find((friend) => friend._id === friendId);
+  const isFriend = friends.find((friend) => friend._id === postUserId);
 
   const patchFriend = async () => {
-    console.log(friendId, _id);
-    const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token.token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(response);
-    if (!response.ok) {
-      console.error(
-        `Error updating friend: ${response.status} - ${response.statusText}`
+    try {
+      const response = await fetch(
+        `http://localhost:3001/users/${user._id}/${postUserId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token.token}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
-      return;
-    }
+     
+      if (!response.ok) {
+        console.error(` ${response.status} - ${response.statusText}`);
+        return;
+      }
 
-    const data = await response.json();
-    dispatch(setFriends({ friends: data }));
+      const data = await response.json(); console.log(data);
+      dispatch(setFriends({ friends: data }));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -59,7 +60,7 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
         <div
           className="flex flex-col"
           onClick={() => {
-            navigate(`/profile/${friendId}`);
+            navigate(`/profile/${postUserId}`);
             navigate(0);
           }}
         >
@@ -73,7 +74,7 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
         className="cursor-pointer hover:bg-indigo-400 p-1 rounded-full "
         onClick={() => patchFriend()}
       >
-        <div className={_id === friendId && "hidden"}>
+        <div className={user._id === postUserId && "hidden"}>
           {isFriend ? (
             <PersonRemoveAlt1Outlined sx={{ color: "red" }} />
           ) : (
