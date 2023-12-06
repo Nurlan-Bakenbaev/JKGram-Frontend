@@ -23,12 +23,9 @@ export const authSlice = createSlice({
     },
     setFriends: (state, action) => {
       if (state.user) {
-        state.user = {
-          ...state.user,
-          friends: action.payload.friends,
-        };
+        state.user.friends = action.payload.friends;
       } else {
-        console.log("User friends non-exists");
+        console.error("user friends non-existent :(");
       }
     },
 
@@ -42,9 +39,17 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
+
     deleteFeedPost: (state, action) => {
       const postIdToDelete = action.payload.postId;
       state.posts = state.posts.filter((post) => post._id !== postIdToDelete);
+    },
+    updateComments: (state, action) => {
+      const { postId, updatedComments } = action.payload;
+      state.comments = {
+        ...state.comments,
+        [postId]: updatedComments,
+      };
     },
   },
 });
@@ -56,5 +61,6 @@ export const {
   setPost,
   setFriends,
   deleteFeedPost,
+  updateComments,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Friends from "../Friends";
 import { useSelector, useDispatch } from "react-redux";
-import { setPost, deleteFeedPost } from "../../redux";
+import { setPost, deleteFeedPost, updateComments } from "../../redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Badge from "@mui/material/Badge";
@@ -25,19 +25,21 @@ const PostWidget = ({
 }) => {
   const [isComment, setIsComment] = useState(false);
   const dispatch = useDispatch();
+
   const { token } = useSelector((state) => state.auth);
   const user = useSelector((state) => state.auth.user);
+  const mode = useSelector((state) => state.auth.mode);
+
   const isLiked = Boolean(likes[user._id]);
   const commentCount = Object.keys(comments).length;
   const likeCount = Object.keys(likes).length;
   const [commentInput, setCommentInput] = useState("");
+  console.log(comments);
 
-  //COMMENTS
   const handleCommentInputChange = (e) => {
     setCommentInput(e.target.value);
   };
-  console.log(commentInput);
-
+  //COMMENT
   const submitComment = async () => {
     try {
       const response = await fetch(
@@ -48,24 +50,53 @@ const PostWidget = ({
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(
-            commentInput,
-            user.firstName,
-            user.lastName,
-            user._id
-          ),
+          body: JSON.stringify({
+            comment: commentInput,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            userId: user._id,
+          }),
         }
       );
-      console.log(response);
+
       if (response.ok) {
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }));
         setCommentInput("");
       } else {
-        console.error("Failed to submit comment");
+        console.error("Failed to submit comment:", response.status);
       }
     } catch (error) {
       console.error("Error submitting comment:", error);
+    }
+  };
+  //DELETE COMMENT
+  const handleDeleteComment = async (_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/post/${postId}/comment/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const updatedPost = await response.json();
+        dispatch(setPost({ post: updatedPost }));
+        dispatch(
+          updateComments({
+            postId,
+            updatedComments: comments.filter((comment) => comment._id !== _id),
+          })
+        );
+      } else {
+        console.error("Failed to delete comment");
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
     }
   };
 
@@ -86,7 +117,15 @@ const PostWidget = ({
   const handleDeletePost = (postId) => {
     dispatch(deleteFeedPost({ postId }));
   };
-  const mode = useSelector((state) => state.auth.mode);
+  // SHARE POST
+  const handleSharePost = () => {
+    // Get the current URL and copy it to the clipboard
+    const postUrl = window.location.href;
+    navigator.clipboard.writeText(postUrl);
+
+    // Alternatively, you can display the URL to the user
+    alert(`Post URL copied to clipboard: ${postUrl}`);
+  };
   return (
     <div
       className={`${mode && "bg-[#3a3349]"} drop-shadow-md px-4 py-4 
@@ -135,7 +174,9 @@ const PostWidget = ({
           </div>
           <div className="flex-gap">
             <button className="flex flex-row  hover:bg-slate-300 p-1 rounded-full">
-              <ShareOutlined sx={{ color: "#4f46e5" }} />
+              <span onClick={handleSharePost}>
+                <ShareOutlined sx={{ color: "#4f46e5" }} />
+              </span>
             </button>
             <button
               className="p-1 hover:bg-red-500 rounded-full"
@@ -148,15 +189,30 @@ const PostWidget = ({
       </div>
       {isComment && (
         <>
-          <div className=" h-[15vh] overflow-y-auto">
-            {comments === 0 && (
+          <div
+            className={` ${
+              commentCount === 0 && "h-[30px]"
+            } mt-2 py-1 border-[1px] rounded-lg border-slate-600 px-2 overflow-y-auto`}
+          >
+            {commentCount === 0 && (
               <div className="flex items-center  justify-center w-full h-full">
                 <p className="text-xs">NO COMMENTS</p>
               </div>
             )}
-            {comments?.map((comment, index) => (
-              <div className="rounded-lg " key={index}>
-                <p className="pl-4 py-1 text-sm">{comment}</p>
+            {comments.map(({ comment, _id, lastName, firstName }) => (
+              <div className=" rounded-lg w-full " key={_id}>
+                <p className="text-[10px] py-1 px-2">{`${firstName} ${lastName}`}</p>
+                <div className="px-3 p-2 rounded-xl bg-green-700">
+                  <p className="pl-3 pr-4 text-sm md:text-md flex justify-between">
+                    <span>{comment}</span>{" "}
+                    <span className="hover:bg-slate-800 p-1 rounded-lg">
+                      <DeleteIcon
+                        onClick={() => handleDeleteComment(_id)}
+                        sx={{ color: "red" }}
+                      />
+                    </span>
+                  </p>
+                </div>
               </div>
             ))}
           </div>

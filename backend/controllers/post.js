@@ -76,10 +76,11 @@ export const likePost = async (req, res) => {
 
 // In your controllers/post.js file
 export const commentPost = async (req, res) => {
+  console.log(req.body);
   try {
     const postId = req.params.postId;
-    const { comment } = req.body;
-    const userId = req.user._id; // Assuming you have userId in the token
+    const { comment, userId, firstName, lastName } = req.body;
+    // Assuming you have userId in the token
 
     // Find the post by its ID
     const post = await Post.findById(postId);
@@ -93,28 +94,62 @@ export const commentPost = async (req, res) => {
       return res.status(400).json({ error: "Comment cannot be empty" });
     }
 
-    // Find user by ID
     const user = await User.findById(userId);
 
-    // If the user doesn't exist, return an error
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Add the comment to the post with user's first and last name
     post.comments.push({
       userId,
+      firstName,
+      lastName,
       comment,
-      firstName: user.firstName,
-      lastName: user.lastName,
     });
+
+    const updatedPost = await post.save();
+
+    res.json(updatedPost);
+  } catch (err) {
+    console.error("Error commenting on post:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+//DELETE COMMENT
+
+export const deleteComment = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const commentId = req.params._id;
+
+    // Find the post by its ID
+    const post = await Post.findById(postId);
+
+    // If the post doesn't exist, return an error
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    // Find the index of the comment in the post's comments array
+    const commentIndex = post.comments.findIndex(
+      (comment) => comment._id.toString() === commentId
+    );
+
+    // If the comment doesn't exist, return an error
+    if (commentIndex === -1) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    // Remove the comment from the comments array
+    post.comments.splice(commentIndex, 1);
 
     // Save the updated post
     const updatedPost = await post.save();
 
-    // Return the updated post
     res.json(updatedPost);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error("Error deleting comment:", err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };

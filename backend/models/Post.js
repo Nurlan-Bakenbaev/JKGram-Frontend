@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const commentSchema = new mongoose.Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     firstName: {
       type: String,
@@ -11,6 +12,7 @@ const commentSchema = new mongoose.Schema(
     lastName: {
       type: String,
     },
+    comment: String,
   },
   { timestamps: true }
 );
@@ -37,6 +39,7 @@ const postSchema = new mongoose.Schema(
       of: Boolean,
     },
     comments: {
+      _id: mongoose.Schema.Types.ObjectId,
       type: [commentSchema],
       default: [],
     },

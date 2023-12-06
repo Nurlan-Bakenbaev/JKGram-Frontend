@@ -15,6 +15,7 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
   const isFriend = friends.find((friend) => friend._id === friendId);
 
   const patchFriend = async () => {
+    console.log(friendId, _id);
     const response = await fetch(
       `http://localhost:3001/users/${_id}/${friendId}`,
       {
@@ -25,6 +26,13 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
         },
       }
     );
+    console.log(response);
+    if (!response.ok) {
+      console.error(
+        `Error updating friend: ${response.status} - ${response.statusText}`
+      );
+      return;
+    }
 
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
@@ -55,7 +63,9 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
             navigate(0);
           }}
         >
-          <p className="hover:text-blue-600 text-xs cursor-pointer border-b border-amber-500">{name} </p>
+          <p className="hover:text-blue-600 text-xs cursor-pointer border-b border-amber-500">
+            {name}{" "}
+          </p>
           <p className="text-slate-500 text-[12px]">{subtitle} </p>
         </div>
       </div>

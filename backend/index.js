@@ -26,8 +26,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(morgan("common"));
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -54,6 +54,7 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/post", postRoutes);
+app.options("*", cors());
 //MONGOOSE
 const PORT = process.env.PORT || 6001;
 mongoose
@@ -63,7 +64,7 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port:${PORT}`));
-    // User.insertMany(users);
-    // Post.insertMany(posts);
+   // User.insertMany(users);
+    //Post.insertMany(posts);
   })
   .catch((err) => console.log(`${err} did not connect`));
