@@ -77,9 +77,9 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
       >
         <div className={user._id === postUserId && "hidden"}>
           {isFriend ? (
-            <PersonRemoveAlt1Outlined sx={{ color: "red", fontSize: "20px" }} />
+            <PersonRemoveAlt1Outlined sx={{ color: "red", fontSize: "25px" }} />
           ) : (
-            <PersonAddAlt1Outlined sx={{ color: "green", fontSize: "20px" }} />
+            <PersonAddAlt1Outlined sx={{ color: "green", fontSize: "25px" }} />
           )}
         </div>
       </div>

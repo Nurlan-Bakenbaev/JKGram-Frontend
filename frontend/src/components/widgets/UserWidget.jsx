@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
@@ -33,12 +33,7 @@ const UserWidget = ({ mode }) => {
       drop-shadow-xl border-[0.8px] 
       border-[#4f4f4fb0] p-4 rounded-md  hover:bg-[#524869]`}
     >
-      <div
-        onClick={() => {
-          setIsCollapsed(!iscollapsed);
-        }}
-        className="flex flex-col"
-      >
+      <div className="flex flex-col">
         <div className="flex-gap ">
           <div>
             <img
@@ -52,7 +47,8 @@ const UserWidget = ({ mode }) => {
               <p>{`${firstName}  ${lastName}`}</p>
             </div>
             <p
-              className={`text-xs ${mode ? "text-gray-400" : "text-gray-600"}`}
+              onClick={() => setIsFriendModal(!isfriendsModal)}
+              className={`text-xs shake text-blue-400`}
             >
               {friends.length} friends
             </p>
@@ -93,7 +89,7 @@ const UserWidget = ({ mode }) => {
           </div>
         )}
       </div>
-      <div className={`${isfriendsModal && "h-[30vh]"}  overflow-y-auto`}>
+      <div className={`${isfriendsModal && "h-[30vh] py-2 mt-3"} block md:hidden  overflow-y-auto`}>
         {isfriendsModal && <FriendsListWidget />}
       </div>
     </aside>
