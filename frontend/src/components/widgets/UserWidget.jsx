@@ -1,18 +1,31 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
-import { Divider } from "@mui/material";
+import { Avatar, Divider } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import FriendsListWidget from "./FriendsListWidget";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-const UserWidget = ({ mode }) => {
+const UserWidget = ({ userId }) => {
   const [iscollapsed, setIsCollapsed] = useState(false);
   const [isfriendsModal, setIsFriendModal] = useState(false);
+  const mode = useSelector((state) => state.auth.mode);
+  const token = useSelector((state) => state.auth.token);
+  const [user, setUser] = useState(null);
 
-  const user = useSelector((state) => state.auth.user);
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   if (!user) {
     return null;
   }
@@ -30,18 +43,17 @@ const UserWidget = ({ mode }) => {
   return (
     <aside
       className={` ${
-        mode && "bg-[#3a3349]"
-      } mx-auto min-w-[260px] w-full md:max-w-[550px]
-      drop-shadow-xl border-[0.8px] 
-      border-[#4f4f4fb0] p-4 rounded-md  hover:bg-[#524869]`}
+        mode && "bg-[#3a3349] hover:bg-[#524869]"
+      } mx-auto min-w-[280px] w-full md:max-w-[520px]
+      drop-shadow-lg border-[0.8px] 
+      border-[#4f4f4fb0] p-4 rounded-md`}
     >
       <div className="flex flex-col">
         <div className="flex-gap ">
           <div>
-            <img
-              className="min-w-[35px] text-xs max-w-[40px] rounded-full"
+            <Avatar
+              alt="User Image"
               src={`http://localhost:3001/assets/${picturePath}`}
-              alt="image"
             />
           </div>
           <div className="w-full">

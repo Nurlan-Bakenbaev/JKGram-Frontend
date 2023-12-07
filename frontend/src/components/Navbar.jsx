@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="flex gap-3 items-center">
         <Link to={"/home"}>
           <h2
-            className={`uppercase hidden md:block md:text-2xl
+            className={` drop-shadow-sm uppercase hidden md:block md:text-2xl
               font-bold bg-clip-text text-transparent
               bg-gradient-to-r from-blue-500 to-purple-500`}
           >
@@ -29,7 +29,7 @@ const Navbar = () => {
         <form className="relative flex items-center">
           <input
             placeholder="Search..."
-            className="p-1 pl-3 text-[12px] 
+            className="p-1 pl-3 border drop-shadow-sm border-slate-300 text-[12px] 
             md:text-md outline-none
              text-black rounded"
             type="text"

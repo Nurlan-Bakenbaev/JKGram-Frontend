@@ -45,7 +45,7 @@ const LoginForm = ({ setForm }) => {
     <div className="relative">
       <div className="w-[300px] md:w-[500px]  p-6 bg-slate-300 rounded-md ">
         <h2 className="text-2xl md:text-4xl  text-center  text-gray-800 mb-6">
-          login
+          Login
         </h2>
         <form className="space-y-4 flex flex-col">
           <input

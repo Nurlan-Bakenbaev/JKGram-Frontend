@@ -130,10 +130,11 @@ const PostWidget = ({
       className={`${
         mode && "bg-[#3a3349] hover:bg-[#524869]"
       }  drop-shadow-md px-4 py-4 
-    min-w-[225px] md:max-w-[550px] lg-w-full border-[1px]
-    border-[#4f4f4fb4] rounded-lg mb-8 mt-5`}
+    min-w-[300px] md:max-w-[520px] lg-w-full border-[1px]
+    border-[#4f4f4fb4] rounded-lg mb-8`}
     >
       <Friends
+        postId={postId}
         postUserId={postUserId}
         name={name}
         subtitle={location}

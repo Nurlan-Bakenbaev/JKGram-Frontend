@@ -43,7 +43,7 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
   return (
     <div
       className=" rounded-lg drop-shadow-lg flex 
-     justify-between items-start min-w-[120px] mx-auto md:max-w-[550px] mb-3"
+     justify-between items-start min-w-[270px] mx-auto md:max-w-[550px] mb-3"
     >
       <div className="text-sm flex gap-3 items-center">
         <div className=" w-[55px] h-[55px]">
@@ -62,7 +62,6 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
           className="flex flex-col"
           onClick={() => {
             navigate(`/profile/${postUserId}`);
-            navigate(0);
           }}
         >
           <p className="hover:text-blue-600 text-xs cursor-pointer border-b border-amber-500">

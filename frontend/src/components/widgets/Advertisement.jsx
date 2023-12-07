@@ -1,11 +1,13 @@
 import { Divider } from "@mui/material";
+import { useSelector } from "react-redux";
 const AdvertisementWidget = () => {
+  const mode = useSelector((state) => state.auth.mode);
   return (
     <div
-      className="bg-[#3a3349] drop-shadow-md 
+      className={`${mode && "bg-[#3a3349]"} drop-shadow-md 
     px-2 py-2 md:max-w-[320px] 
     lg-w-full min-w-[220px] border-[1px]
-     border-[#4f4f4fb4] rounded-lg mb-2 "
+     border-[#4f4f4fb4] rounded-lg mb-2 `}
     >
       <div className="flex justify-between py-2">
         <p className="text-[10px] text-slate-500">Advertisement</p>
