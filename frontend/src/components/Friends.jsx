@@ -26,13 +26,14 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
           },
         }
       );
-     
+
       if (!response.ok) {
         console.error(` ${response.status} - ${response.statusText}`);
         return;
       }
 
-      const data = await response.json(); console.log(data);
+      const data = await response.json();
+      console.log(data);
       dispatch(setFriends({ friends: data }));
     } catch (error) {
       console.error(error);
@@ -42,13 +43,13 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
   return (
     <div
       className=" rounded-lg drop-shadow-lg flex 
-     justify-between items-start min-w-[180px] mb-3"
+     justify-between items-start min-w-[120px] mx-auto md:max-w-[550px] mb-3"
     >
       <div className="text-sm flex gap-3 items-center">
         <div className=" w-[55px] h-[55px]">
           {userPicturePath ? (
             <img
-              className="border border-slate-400
+              className="border border-slate-400 duration-300 hover:scale-110 
                w-full h-full object-cover rounded-full"
               src={`http://localhost:3001/assets/${userPicturePath}`}
               alt="User"
@@ -65,7 +66,7 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
           }}
         >
           <p className="hover:text-blue-600 text-xs cursor-pointer border-b border-amber-500">
-            {name}{" "}
+            {name}
           </p>
           <p className="text-slate-500 text-[12px]">{subtitle} </p>
         </div>
@@ -76,9 +77,9 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
       >
         <div className={user._id === postUserId && "hidden"}>
           {isFriend ? (
-            <PersonRemoveAlt1Outlined sx={{ color: "red" }} />
+            <PersonRemoveAlt1Outlined sx={{ color: "red", fontSize: "20px" }} />
           ) : (
-            <PersonAddAlt1Outlined sx={{ color: "green" }} />
+            <PersonAddAlt1Outlined sx={{ color: "green", fontSize: "20px" }} />
           )}
         </div>
       </div>

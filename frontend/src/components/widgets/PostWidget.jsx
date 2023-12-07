@@ -127,8 +127,10 @@ const PostWidget = ({
   };
   return (
     <div
-      className={`${mode && "bg-[#3a3349] "} drop-shadow-md px-4 py-4 
-    md:max-w-[520px] lg-w-full min-w-[220px]  border-[1px]
+      className={`${
+        mode && "bg-[#3a3349]  hover:bg-[#524869]"
+      }  drop-shadow-md px-4 py-4 
+    min-w-[225px] md:max-w-[550px] lg-w-full border-[1px]
     border-[#4f4f4fb4] rounded-lg mb-8 mt-5`}
     >
       <Friends
@@ -203,7 +205,7 @@ const PostWidget = ({
                 <p className="text-[10px] py-1 px-2">{`${firstName} ${lastName}`}</p>
                 <div className="px-3 p-2 rounded-xl bg-green-700">
                   <p className="pl-3 pr-4 text-sm md:text-md flex justify-between">
-                    <span>{comment}</span>{" "}
+                    <span>{comment}</span>
                     <span className="hover:bg-slate-800 flex justify-center p-1 w-[22px] h-[22px] rounded-full">
                       <DeleteIcon
                         onClick={() => handleDeleteComment(_id)}

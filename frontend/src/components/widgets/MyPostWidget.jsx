@@ -62,7 +62,7 @@ const MyPostWidget = ({ mode }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div
-      className={`md:max-w-[520px] w-full drop-shadow-md ${
+      className={`md:max-w-[550px] w-full drop-shadow-md ${
         mode ? "bg-[#3a3349]" : "bg-white"
       } md:w-full px-5 py-4  flex-gap flex-col border
       border-[#4f4f4fb7] p-2 rounded-lg`}

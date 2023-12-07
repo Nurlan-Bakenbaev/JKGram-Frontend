@@ -53,7 +53,7 @@ export const addRemoveFriend = async (req, res) => {
     );
 
     res.status(200).json(formattedFriends);
-    console.log(formattedFriends);
+    
   } catch (err) {
     res.status(300).json({ message: err.message });
   }
