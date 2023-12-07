@@ -6,6 +6,8 @@ import WorkIcon from "@mui/icons-material/Work";
 import { Divider } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import FriendsListWidget from "./FriendsListWidget";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const UserWidget = ({ mode }) => {
   const [iscollapsed, setIsCollapsed] = useState(false);
   const [isfriendsModal, setIsFriendModal] = useState(false);
@@ -58,7 +60,11 @@ const UserWidget = ({ mode }) => {
               setIsCollapsed(!iscollapsed);
             }}
           >
-            <KeyboardDoubleArrowDownIcon />
+            {!iscollapsed ? (
+              <KeyboardDoubleArrowDownIcon />
+            ) : (
+              <KeyboardDoubleArrowUpIcon />
+            )}
           </div>
         </div>
         {iscollapsed && (
@@ -86,10 +92,24 @@ const UserWidget = ({ mode }) => {
                 <p>{impressions}</p>
               </span>
             </div>
+            <div
+              onClick={() => setIsFriendModal(!isfriendsModal)}
+              className="text-sm py-2  flex md:hidden  justify-end  items-center gap-2 w-full"
+            >
+              <span>Your friends list </span>
+              <span>
+                <KeyboardArrowDownIcon sx={{}} />
+              </span>
+            </div>
           </div>
         )}
       </div>
-      <div className={`${isfriendsModal && "h-[30vh] py-2 mt-3"} block md:hidden  overflow-y-auto`}>
+
+      <div
+        className={`${
+          isfriendsModal && "h-[30vh] py-2 mt-3"
+        } block md:hidden  overflow-y-auto`}
+      >
         {isfriendsModal && <FriendsListWidget />}
       </div>
     </aside>

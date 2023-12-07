@@ -23,7 +23,7 @@ const MobileMenu = ({ mode }) => {
           <>
             <div
               className={`fixed top-[80px] ${
-                mode ? "bg-slate-800" : "bg-slate-300"
+                mode ? "bg-[#4c4361]" : "bg-slate-300"
               } 
                bottom-0
                 w-[250px] h-[100vh] right-0 border-[1px] border-slate-500

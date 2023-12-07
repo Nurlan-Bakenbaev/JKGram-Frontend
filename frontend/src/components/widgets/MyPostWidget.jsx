@@ -63,7 +63,7 @@ const MyPostWidget = ({ mode }) => {
   return (
     <div
       className={`md:max-w-[550px] w-full drop-shadow-md ${
-        mode ? "bg-[#3a3349]" : "bg-white"
+        mode ? "bg-[#3a3349] hover:bg-[#524869]" : "bg-white"
       } md:w-full px-5 py-4  flex-gap flex-col border
       border-[#4f4f4fb7] p-2 rounded-lg`}
     >
