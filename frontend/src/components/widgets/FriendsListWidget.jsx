@@ -6,7 +6,6 @@ const FriendsListWidget = () => {
 
   const token = useSelector((state) => state.auth.token);
 
- 
   return (
     <div
       className={`px-3 mb-4 lg:mb-8  rounded-lg ${

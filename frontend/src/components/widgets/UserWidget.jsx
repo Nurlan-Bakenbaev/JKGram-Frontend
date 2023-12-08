@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import { Avatar, Divider } from "@mui/material";
@@ -13,6 +13,7 @@ const UserWidget = ({ userId }) => {
   const mode = useSelector((state) => state.auth.mode);
   const token = useSelector((state) => state.auth.token);
   const [user, setUser] = useState(null);
+  const LoggedUser = useSelector((state) => state.auth.user);
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -20,12 +21,13 @@ const UserWidget = ({ userId }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    console.log(data.friends);
     setUser(data);
   };
 
   useEffect(() => {
     getUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setUser]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!user) {
     return null;
   }
@@ -64,7 +66,7 @@ const UserWidget = ({ userId }) => {
               onClick={() => setIsFriendModal(!isfriendsModal)}
               className={`text-xs shake text-blue-400`}
             >
-              {friends.length} friends
+              {LoggedUser.friends.length} friends
             </p>
           </div>
           <div

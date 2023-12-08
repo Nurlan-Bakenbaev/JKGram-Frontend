@@ -7,6 +7,7 @@ import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Followers from "../components/Followers";
 
 const Profile = () => {
   const { _id } = useSelector((state) => state.auth.user);
@@ -26,7 +27,6 @@ const Profile = () => {
 
     setUserData(data);
   };
-  console.log(userData);
   useEffect(() => {
     getUser();
   }, [params.userId, token]); //eslint-disable-line
@@ -39,7 +39,7 @@ const Profile = () => {
           className="
       flex flex-col-reverse 
       md:flex-row md:items-start
-      md:justify-between gap-4 px-3 pt-[120px]"
+      md:justify-between gap-2 px-3 pt-[120px]"
         >
           <div className="hidden lg:flex">
             <UserWidget userId={userData._id} mode={mode} />
@@ -58,7 +58,7 @@ const Profile = () => {
            items-center lg:flex"
           >
             <AdvertisementWidget />
-            {userData.friends}
+            <Followers name={userData} userId={userData._id} />
           </div>
         </div>
       </div>

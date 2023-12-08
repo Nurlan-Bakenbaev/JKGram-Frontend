@@ -22,7 +22,6 @@ const Home = () => {
         >
           <div className="hidden lg:flex flex-col gap-5">
             <UserWidget userId={_id} mode={mode} />
-            <div className="hidden md:block"></div>
           </div>
           <div
             className="flex flex-col drop-shadow-md

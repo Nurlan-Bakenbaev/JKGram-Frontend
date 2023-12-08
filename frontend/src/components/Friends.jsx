@@ -33,7 +33,6 @@ const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
       }
 
       const data = await response.json();
-      console.log(data);
       dispatch(setFriends({ friends: data }));
     } catch (error) {
       console.error(error);
