@@ -9,6 +9,25 @@ export const getUser = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+//FIND BY NAME
+export const getUserByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    console.log(name);
+    const users = await User.find({
+      $or: [
+        { firstName: { $regex: new RegExp(name, "i") } },
+        { lastName: { $regex: new RegExp(name, "i") } },
+      ],
+    });
+
+    res.status(200).json(users);
+  } catch (err) {
+    console.error("Error searching users:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
@@ -53,7 +72,6 @@ export const addRemoveFriend = async (req, res) => {
     );
 
     res.status(200).json(formattedFriends);
-    
   } catch (err) {
     res.status(300).json({ message: err.message });
   }

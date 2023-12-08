@@ -116,13 +116,12 @@ const PostWidget = ({
   const handleDeletePost = (postId) => {
     dispatch(deleteFeedPost({ postId }));
   };
-  // SHARE POST
+
   const handleSharePost = () => {
-    // Get the current URL and copy it to the clipboard
     const postUrl = window.location.href;
     navigator.clipboard.writeText(postUrl);
 
-    // Alternatively, you can display the URL to the user
+   
     alert(`Post URL copied to clipboard: ${postUrl}`);
   };
   return (

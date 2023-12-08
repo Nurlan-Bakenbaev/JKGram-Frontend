@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import UserWidget from "../components/widgets/UserWidget";
 import MyPostWidget from "../components/widgets/MyPostWidget";
-
 import PostsWidgets from "../components/widgets/PostsWidgets";
 import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
@@ -41,7 +40,7 @@ const Home = () => {
            items-center lg:flex"
           >
             <AdvertisementWidget />
-            <FriendsListWidget />
+            <FriendsListWidget userId={_id} />
           </div>
         </div>
       </div>

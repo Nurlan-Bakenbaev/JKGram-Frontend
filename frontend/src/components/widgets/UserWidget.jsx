@@ -21,7 +21,6 @@ const UserWidget = ({ userId }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    console.log(data.friends);
     setUser(data);
   };
 
@@ -124,7 +123,7 @@ const UserWidget = ({ userId }) => {
           isfriendsModal && "h-[30vh] py-2 mt-3"
         } block md:hidden  overflow-y-auto`}
       >
-        {isfriendsModal && <FriendsListWidget />}
+        {isfriendsModal && <FriendsListWidget userId={user._id} />}
       </div>
     </aside>
   );

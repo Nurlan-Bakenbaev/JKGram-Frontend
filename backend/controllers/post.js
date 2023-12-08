@@ -80,12 +80,7 @@ export const commentPost = async (req, res) => {
   try {
     const postId = req.params.postId;
     const { comment, userId, firstName, lastName } = req.body;
-    // Assuming you have userId in the token
-
-    // Find the post by its ID
     const post = await Post.findById(postId);
-
-    // If the post doesn't exist, return an error
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
