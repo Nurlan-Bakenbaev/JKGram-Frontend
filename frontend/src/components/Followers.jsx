@@ -42,7 +42,7 @@ const Followers = ({ userId, name }) => {
             }}
             className="hover:bg-[#5d507a]  w-full
               border border-[#4f4466]
-              rounded-md px-4 py-1 mt-1 flex justify-between 
+              rounded-md px-4 py-2 mt-1 flex justify-between 
               items-center gap-4 "
             key={_id}
           >
