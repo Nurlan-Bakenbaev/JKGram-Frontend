@@ -16,22 +16,21 @@ const Home = () => {
   return (
     <div className="relative w-full min-h-[100vh] max-h-full">
       <Navbar />
-
-      <div className="w-full md:w-[90%] lg:w-[80%] mx-auto">
+      <div className="w-full lg:w-[80%] mx-auto">
         <div
           className="
       flex flex-col-reverse 
       md:flex-row md:items-start
-      md:justify-between gap-4 px-3 pt-[120px]"
+      justify-center gap-5 px-3 pt-[120px]"
         >
-          <div className="hidden lg:flex flex-col gap-5">
+          <div className="hidden  md:flex flex-col gap-3">
             <UserWidget userId={_id} mode={mode} />
             <RecentPosts />
           </div>
 
           <div
-            className="flex flex-col drop-shadow-md
-           w-full justify-center items-center"
+            className="flex  flex-col drop-shadow-md
+           justify-center items-center"
           >
             <div className="w-full flex justify-center">
               <MyPostWidget mode={mode} />

@@ -64,9 +64,23 @@ export const likePost = async (req, res) => {
       id,
       { likes: post.likes },
       { new: true }
-    );
+    ); // Find the user
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    res.status(200).json(updatedPost);
+    // Update the user's likedPosts array
+    if (isLiked) {
+      user.likedPosts.pull(updatedPost._id);
+    } else {
+      user.likedPosts.push(updatedPost._id);
+    }
+
+    // Save the updated user
+    await user.save();
+
+    res.status(200).json({ post: updatedPost, user });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
