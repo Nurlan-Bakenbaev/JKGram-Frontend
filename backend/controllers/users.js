@@ -12,22 +12,30 @@ export const getUser = async (req, res) => {
 //FIND BY NAME
 export const getUserByName = async (req, res) => {
   try {
-    const params = req.params;
-    console.log(params);
-    const users = await User.find({
-      $or: [
-        { firstName: { $regex: new RegExp(params.name, "i") } },
-        { lastName: { $regex: new RegExp(params.name, "i") } },
-      ],
-    });
+    const nameParam = req.query.name;
 
-    res.status(200).json(users);
+    if (mongoose.Types.ObjectId.isValid(nameParam)) {
+      // If it's a valid ObjectId, query by _id
+      const user = await User.findById(nameParam);
+      res.status(200).json(user ? [user] : []);
+    } else {
+      // If it's not a valid ObjectId, search by name
+      const users = await User.find({
+        $or: [
+          { firstName: { $regex: new RegExp(nameParam, "i") } },
+          { lastName: { $regex: new RegExp(nameParam, "i") } },
+        ],
+      });
+
+      res.status(200).json(users);
+    }
   } catch (err) {
     console.error("Error searching users:", err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
+// GET FRIENDS
 export const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;

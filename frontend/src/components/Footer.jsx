@@ -10,19 +10,19 @@ const Footer = () => {
             <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
             <ul className="list-none">
               <li>
-                <Link to="/my-posts" className="hover:text-gray-300">
+                <p  className="hover:text-gray-300">
                   My Posts
-                </Link>
+                </p>
               </li>
               <li>
-                <Link to="/my-friends" className="hover:text-gray-300">
+                <p  className="hover:text-gray-300">
                   My Friends
-                </Link>
+                </p>
               </li>
               <li>
-                <Link to="/liked-posts" className="hover:text-gray-300">
+                <p className="hover:text-gray-300">
                   Liked Posts
-                </Link>
+                </p>
               </li>
             </ul>
           </div>
