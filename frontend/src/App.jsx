@@ -2,12 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Footer from "./components/Footer";
+
 const App = () => {
   let mode = useSelector((state) => state.auth.mode);
   const isAuth = Boolean(useSelector((state) => state.auth.token));
+  
   return (
     <BrowserRouter>
       <div

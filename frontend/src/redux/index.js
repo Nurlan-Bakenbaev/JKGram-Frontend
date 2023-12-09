@@ -28,6 +28,9 @@ export const authSlice = createSlice({
       const { key, value } = action.payload;
       state.notifications.push({ key, value });
     },
+    resetNotifications: (state) => {
+      state.notifications = [];
+    },
     setFriends: (state, action) => {
       if (state.user) {
         state.user.friends = action.payload.friends;
@@ -69,6 +72,7 @@ export const {
   deleteFeedPost,
   updateComments,
   setNotification,
+  resetNotifications,
 } = authSlice.actions;
 
 export default authSlice.reducer;

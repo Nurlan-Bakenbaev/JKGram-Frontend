@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import UserWidget from "../components/widgets/UserWidget";
 import MyPostWidget from "../components/widgets/MyPostWidget";
@@ -6,16 +6,18 @@ import PostsWidgets from "../components/widgets/PostsWidgets";
 import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
 import RecentPosts from "../components/RecentPosts";
-import { Alert, AlertTitle } from "@mui/material";
+import { useEffect } from "react";
+import { setLogin } from "../redux";
 
 const Home = () => {
   const { _id } = useSelector((state) => state.auth.user);
   const mode = useSelector((state) => state.auth.mode);
+
   return (
     <div className="relative w-full min-h-[100vh] max-h-full">
       <Navbar />
 
-      <div className="w-[90%] md:w-[90%] lg:w-[80%] mx-auto">
+      <div className="w-full md:w-[90%] lg:w-[80%] mx-auto">
         <div
           className="
       flex flex-col-reverse 

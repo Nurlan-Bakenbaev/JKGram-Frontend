@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../redux";
 import { Alert } from "@mui/material";
 const LoginForm = ({ setForm }) => {
+  const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -20,8 +21,6 @@ const LoginForm = ({ setForm }) => {
   const handleTooglePassword = () => {
     setShowPassword(!showPassword);
   };
-  const dispatch = useDispatch();
-
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -41,6 +40,21 @@ const LoginForm = ({ setForm }) => {
       setErrMsg(true);
     }
   };
+
+  useEffect(() => {
+    const initializeUser = async () => {
+      const storedUserData = JSON.parse(localStorage.getItem("loginData"));
+
+      if (!storedUserData) {
+        handleLogin();
+      }
+      dispatch(
+        setLogin({ token: storedUserData.token, user: storedUserData.user })
+      );
+      navigate("/home");
+    };
+    initializeUser();
+  }, []);
   return (
     <div className="relative">
       <div className="w-[300px] md:w-[500px]  p-6 bg-slate-300 rounded-md ">

@@ -3,19 +3,24 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import NotificationAddIcon from "@mui/icons-material/NotificationAdd";
 import ChatIcon from "@mui/icons-material/Chat";
 import { useSelector, useDispatch } from "react-redux";
-import { setLogOut, setMode } from "../redux/index";
+import { resetNotifications, setLogOut, setMode } from "../redux/index";
 import HelpIcon from "@mui/icons-material/Help";
 import { useNavigate } from "react-router-dom";
 import Badge from "@mui/material/Badge";
+import { Button } from "@mui/material";
+import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { useState } from "react";
 const MenuLinks = ({ setIsMenuOpen }) => {
+  const [isNotification, setIsNotification] = useState(false);
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
   const notifications = useSelector((state) => state.auth.notifications);
-
   const userNames = `${user?.firstName} ${user?.lastName}`;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogOut = () => {
+    localStorage.removeItem("loginData");
     dispatch(setLogOut());
     navigate("/");
   };
@@ -23,7 +28,10 @@ const MenuLinks = ({ setIsMenuOpen }) => {
     dispatch(setMode());
     setIsMenuOpen(false);
   };
-
+  const handleReadNotifications = () => {
+    dispatch(resetNotifications());
+    setIsNotification(!isNotification);
+  };
   return (
     <div
       className={`flex flex-col md:flex-row pt-10 
@@ -46,10 +54,11 @@ const MenuLinks = ({ setIsMenuOpen }) => {
         )}
       </div>
       <div
-        className={`flex flex-col md:flex-row 
+        className={`flex flex-col md:flex-row  relative
       items-center gap-5`}
       >
         <button
+          onClick={() => setIsNotification(!isNotification)}
           className="shake transition 
          duration-300 hover:text-red-500 ease-in"
         >
@@ -57,6 +66,40 @@ const MenuLinks = ({ setIsMenuOpen }) => {
             <NotificationAddIcon />
           </Badge>
         </button>
+        {isNotification && (
+          <div className="absolute bg-[#e0e7ff] px-2 py-3 top-[57px] z-[99] left-[-60px]  w-[250px] border border-slate-300 rounded-md">
+            {notifications?.map(({ key, value, idx }) => (
+              <div className="flex flex-col px-2" key={idx}>
+                <p className="text-xs">{key}: </p>
+                <p
+                  className={`${
+                    key === "Posted"
+                      ? "text-green-600 text-sm bg-green-50 p-1 rounded-md"
+                      : "bg-red-100 text-sm p-1 text-red-700 rounded-md "
+                  }`}
+                >
+                  {key === "Comment" ? (
+                    <ReportGmailerrorredIcon sx={{ marginRight: "5px" }} />
+                  ) : (
+                    <CheckCircleOutlineIcon sx={{ marginRight: "5px" }} />
+                  )}
+                  {value}
+                </p>
+              </div>
+            ))}
+            <div className=" text-right w-full mt-2 ">
+              <Button
+                onClick={handleReadNotifications}
+                sx={{ fontSize: "10px" }}
+                variant="contained"
+                color="success"
+              >
+                Set as read
+              </Button>
+            </div>
+          </div>
+        )}
+
         <button
           className="hover:text-green-400
          transition duration-300 hover:scale-110"
@@ -80,5 +123,4 @@ const MenuLinks = ({ setIsMenuOpen }) => {
     </div>
   );
 };
-
 export default MenuLinks;

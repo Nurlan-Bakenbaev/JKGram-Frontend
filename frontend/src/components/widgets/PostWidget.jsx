@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Friends from "../Friends";
 import { useSelector, useDispatch } from "react-redux";
-import { setPost, deleteFeedPost, setPosts } from "../../redux";
+import {
+  setPost,
+  deleteFeedPost,
+  setPosts,
+  setNotification,
+} from "../../redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Badge from "@mui/material/Badge";
@@ -61,6 +66,12 @@ const PostWidget = ({
 
       if (response.ok) {
         const updatedPost = await response.json();
+        dispatch(
+          setNotification({
+            key: "Posted",
+            value: commentInput,
+          })
+        );
         dispatch(setPost({ post: updatedPost }));
         setCommentInput("");
       } else {
@@ -200,7 +211,7 @@ const PostWidget = ({
       </div>
       {isComment && (
         <>
-          <Comments  postId={postId} comments={comments} />
+          <Comments postId={postId} comments={comments} />
           <form className="relative">
             <input
               value={commentInput}

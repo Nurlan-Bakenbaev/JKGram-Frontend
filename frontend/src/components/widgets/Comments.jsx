@@ -23,7 +23,10 @@ const Comments = ({ comments, postId }) => {
       if (response.ok) {
         const updatedPost = await response.json();
         dispatch(
-          setNotification({ key: "comment", value: "Your comment deleted" })
+          setNotification({
+            key: "Comment",
+            value: "Your comment is deleted",
+          })
         );
 
         dispatch(setPost({ post: updatedPost }));
@@ -54,15 +57,15 @@ const Comments = ({ comments, postId }) => {
         )}
         {comments.map(({ comment, _id, lastName, firstName }) => (
           <div className=" rounded-lg w-full " key={_id}>
-            <p className="text-[10px] py-1 px-2">
-              <AccountCircleIcon sx={{ fontSize: "18px" }} />{" "}
-              {`${firstName} ${lastName}`}
-            </p>
             <div className="px-3 p-2 rounded-xl bg-green-700">
-              <p className="pl-3 pr-4 text-sm md:text-md flex justify-between">
+              <p className="text-[10px] py-1 px-2">
+                <AccountCircleIcon sx={{ fontSize: "15px" }} />
+                {`${firstName} ${lastName}`}
+              </p>
+              <p className="pl-3 pr-4 text-sm md:text-md flex justify-between items-center">
                 <span>{comment}</span>
                 <button className="hover:bg-[#3b82f6]  flex justify-center p-2 rounded-md">
-                  Delete{" "}
+                  Delete
                   <DeleteIcon
                     onClick={() => handleDeleteComment(_id)}
                     sx={{ color: "red", fontSize: "18px", marginLeft: "2px" }}

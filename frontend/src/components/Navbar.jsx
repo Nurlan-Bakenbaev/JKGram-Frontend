@@ -15,10 +15,10 @@ const Navbar = () => {
     px-2 md:px-10 
     border-b-[1px]  `}
     >
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-1 lg:gap-5 items-center">
         <Link to={"/home"}>
           <h2
-            className={` drop-shadow-sm uppercase pl-3 text-xl md:block md:text-2xl
+            className={` drop-shadow-sm uppercase px-1 text-[15px] md:block md:text-2xl
               font-bold bg-clip-text text-transparent
               bg-gradient-to-r from-blue-500 to-purple-500`}
           >
