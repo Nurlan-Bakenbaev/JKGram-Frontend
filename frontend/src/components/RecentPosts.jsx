@@ -11,7 +11,7 @@ const RecentPosts = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3001/post", {
+        const response = await fetch("https://postgrammserver.onrender.com/post", {
           method: "GET",
           headers: { Authorization: `Bearer  ${token}` },
         });

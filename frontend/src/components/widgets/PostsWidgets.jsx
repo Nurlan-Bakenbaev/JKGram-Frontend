@@ -9,10 +9,13 @@ const PostsWidgets = ({ userId, isProfile = false }) => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3001/post", {
-          method: "GET",
-          headers: { Authorization: `Bearer  ${token}` },
-        });
+        const response = await fetch(
+          "https://postgrammserver.onrender.com/post",
+          {
+            method: "GET",
+            headers: { Authorization: `Bearer  ${token}` },
+          }
+        );
         const data = await response.json();
         const sortedPosts = [...data].sort((a, b) => {
           const timeA = new Date(a.createdAt).getTime();
@@ -25,7 +28,7 @@ const PostsWidgets = ({ userId, isProfile = false }) => {
       }
     };
     const getUserPosts = async () => {
-      const response = await fetch(`http://localhost:3001/post/${userId}`, {
+      const response = await fetch(`https://postgrammserver.onrender.com/post/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer  ${token}` },
       });

@@ -17,7 +17,7 @@ const Profile = () => {
   useEffect(() => {
     const getUser = async () => {
       const response = await fetch(
-        `http://localhost:3001/users/${params.userId}`,
+        `https://postgrammserver.onrender.com/users/${params.userId}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

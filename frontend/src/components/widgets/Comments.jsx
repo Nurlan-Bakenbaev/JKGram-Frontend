@@ -11,7 +11,7 @@ const Comments = ({ comments, postId }) => {
   const handleDeleteComment = async (_id) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/post/${postId}/comment/${_id}`,
+        `https://postgrammserver.onrender.com/post/${postId}/comment/${_id}`,
         {
           method: "DELETE",
           headers: {

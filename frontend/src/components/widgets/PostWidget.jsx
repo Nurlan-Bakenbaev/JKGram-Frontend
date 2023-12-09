@@ -48,7 +48,7 @@ const PostWidget = ({
   const submitComment = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/post/${postId}/comment`,
+        `https://postgrammserver.onrender.com/post/${postId}/comment`,
         {
           method: "POST",
           headers: {
@@ -85,7 +85,7 @@ const PostWidget = ({
   const deletePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/post/${postId}/delete`,
+        `https://postgrammserver.onrender.com/post/${postId}/delete`,
         {
           method: "DELETE",
           headers: {
@@ -110,7 +110,7 @@ const PostWidget = ({
   };
   //LIKE UNLIKE
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3001/post/${postId}/like`, {
+    const response = await fetch(`https://postgrammserver.onrender.com/post/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -148,7 +148,7 @@ const PostWidget = ({
       {picturePath && (
         <img
           className="w-full rounded-lg md:max-w-[520px] h-auto  mb-2 "
-          src={`http://localhost:3001/assets/${picturePath}`}
+          src={`https://postgrammserver.onrender.com/assets/${picturePath}`}
           alt="Post"
         />
       )}

@@ -15,10 +15,13 @@ const UserWidget = ({ userId }) => {
   const [user, setUser] = useState(null);
   const LoggedUser = useSelector((state) => state.auth.user);
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `https://postgrammserver.onrender.com/users/${userId}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setUser(data);
   };
@@ -43,7 +46,7 @@ const UserWidget = ({ userId }) => {
   return (
     <aside
       className={` ${
-        mode && "bg-[#3a3349] hover:bg-[#524869]"
+        mode ? "bg-[#3a3349] hover:bg-[#524869]" : " bg-white"
       } mx-auto min-w-[280px] w-full md:max-w-[520px]
       drop-shadow-lg border-[0.8px] 
       border-[#4f4f4fb0] p-4 rounded-md`}
@@ -53,7 +56,7 @@ const UserWidget = ({ userId }) => {
           <div>
             <Avatar
               alt="User Image"
-              src={`http://localhost:3001/assets/${picturePath}`}
+              src={`https://postgrammserver.onrender.com/assets/${picturePath}`}
             />
           </div>
           <div className="w-full">

@@ -7,10 +7,13 @@ const SearchFriend = () => {
   const [foundUsers, setFoundUsers] = useState([]);
   const token = useSelector((state) => state.auth.token);
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
+    e.preventdefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/users/${encodeURIComponent(searchQuery)}`,
+        `https://postgrammserver.onrender.com/users/${encodeURIComponent(
+          searchQuery
+        )}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

@@ -28,7 +28,7 @@ export default function ActionAreaCard({
         <CardMedia
           sx={{ height: "80px" }}
           component="img"
-          image={`http://localhost:3001/assets/${picturePath}`}
+          image={`https://postgrammserver.onrender.com/assets/${picturePath}`}
           alt="green iguana"
         />
         <CardContent>

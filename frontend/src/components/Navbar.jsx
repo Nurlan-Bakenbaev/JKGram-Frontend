@@ -9,11 +9,11 @@ const Navbar = () => {
   return (
     <nav
       className={` drop-shadow-lg h-[80px] w-full fixed top-0 ${
-        mode ? "bg-[#2a2536] border-[#4f4f4f]" : "bg-white border-slate-300"
+        mode ? "bg-[#2a2536]  hover:bg-[#4a415f] border-[#4f4f4f]" : "bg-white border-slate-300"
       } z-50  
     flex justify-between items-center 
     px-2 md:px-10 
-    border-b-[1px]  `}
+    border-b-[1px] `}
     >
       <div className="flex gap-1 lg:gap-5 items-center">
         <Link to={"/home"}>

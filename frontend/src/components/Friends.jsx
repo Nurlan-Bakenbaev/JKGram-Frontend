@@ -18,7 +18,7 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
   const patchFriend = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/users/${user._id}/${postUserId}`,
+        `https://postgrammserver.onrender.com/users/${user._id}/${postUserId}`,
         {
           method: "PATCH",
           headers: {
@@ -53,7 +53,7 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
               className="border border-slate-400 duration-300
                hover:scale-110 
                w-full h-full object-cover rounded-full"
-              src={`http://localhost:3001/assets/${userPicturePath}`}
+              src={`https://postgrammserver.onrender.com/assets/${userPicturePath}`}
               alt="User"
             />
           ) : (

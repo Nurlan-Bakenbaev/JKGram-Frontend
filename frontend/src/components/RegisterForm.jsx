@@ -37,7 +37,7 @@ const Register = ({ setForm }) => {
       }
       formData.append("picturePath", register.picture.name);
       const response = await axios.post(
-        "http://localhost:3001/auth/register",
+        "https://postgrammserver.onrender.com/auth/register",
         formData
       );
 
