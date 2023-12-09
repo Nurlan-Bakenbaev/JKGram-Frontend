@@ -12,12 +12,12 @@ export const getUser = async (req, res) => {
 //FIND BY NAME
 export const getUserByName = async (req, res) => {
   try {
-    const { name } = req.params;
-    console.log(name);
+    const params = req.params;
+    console.log(params);
     const users = await User.find({
       $or: [
-        { firstName: { $regex: new RegExp(name, "i") } },
-        { lastName: { $regex: new RegExp(name, "i") } },
+        { firstName: { $regex: new RegExp(params.name, "i") } },
+        { lastName: { $regex: new RegExp(params.name, "i") } },
       ],
     });
 

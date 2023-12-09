@@ -19,5 +19,4 @@ const Buttons = ({ text, icon, onclick }) => {
     </div>
   );
 };
-
 export default Buttons;

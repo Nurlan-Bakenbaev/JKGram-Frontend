@@ -13,6 +13,7 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
   const token = useSelector((state) => state.auth);
   const { friends } = useSelector((state) => state.auth.user);
   const isFriend = friends.find((friend) => friend._id === postUserId);
+  const pathProfile = location.pathname.includes(`/profile/${postUserId}`);
 
   const patchFriend = async () => {
     try {
@@ -33,7 +34,7 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
       }
 
       const data = await response.json();
-      dispatch(setFriends({ friends: data }));
+      !pathProfile && dispatch(setFriends({ friends: data }));
     } catch (error) {
       console.error(error);
     }
@@ -42,13 +43,15 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
   return (
     <div
       className=" rounded-lg drop-shadow-lg flex 
-     justify-between items-start min-w-[270px] mx-auto md:max-w-[550px] mb-3"
+     justify-between items-start min-w-[220px] mx-auto
+      md:max-w-[550px] mb-3"
     >
       <div className="text-sm flex gap-3 items-center">
         <div className=" w-[55px] h-[55px]">
           {userPicturePath ? (
             <img
-              className="border border-slate-400 duration-300 hover:scale-110 
+              className="border border-slate-400 duration-300
+               hover:scale-110 
                w-full h-full object-cover rounded-full"
               src={`http://localhost:3001/assets/${userPicturePath}`}
               alt="User"
@@ -73,7 +76,11 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
         className="cursor-pointer hover:bg-indigo-400 p-1 rounded-full "
         onClick={() => patchFriend()}
       >
-        <div className={user._id === postUserId && "hidden"}>
+        <div
+          className={
+            (user._id === postUserId && "hidden") || (pathProfile && "hidden")
+          }
+        >
           {isFriend ? (
             <PersonRemoveAlt1Outlined sx={{ color: "red", fontSize: "25px" }} />
           ) : (

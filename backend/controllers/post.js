@@ -110,39 +110,41 @@ export const commentPost = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+//DELETE POST
+export const deletePost = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const result = await Post.deleteOne({ _id: postId });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    const post = await Post.find();
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 //DELETE COMMENT
-
 export const deleteComment = async (req, res) => {
   try {
     const postId = req.params.postId;
     const commentId = req.params._id;
 
-    // Find the post by its ID
     const post = await Post.findById(postId);
-
-    // If the post doesn't exist, return an error
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
-
-    // Find the index of the comment in the post's comments array
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id.toString() === commentId
     );
-
-    // If the comment doesn't exist, return an error
     if (commentIndex === -1) {
       return res.status(404).json({ error: "Comment not found" });
     }
-
-    // Remove the comment from the comments array
     post.comments.splice(commentIndex, 1);
-
-    // Save the updated post
     const updatedPost = await post.save();
-
-    res.json(updatedPost);
+    res.status(201).json(updatedPost);
   } catch (err) {
     console.error("Error deleting comment:", err);
     res.status(500).json({ error: "Internal Server Error" });

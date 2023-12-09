@@ -21,6 +21,13 @@ body {
   align-items: center;
   gap: 12px;
 }
+.transition-transform {
+  transition-property: transform;
+}
+
+.transform {
+  transform: translateX(-100%);
+}
 
 .animated:hover {
   animation: spin 8s linear infinite;

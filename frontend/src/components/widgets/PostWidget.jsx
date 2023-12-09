@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Friends from "../Friends";
 import { useSelector, useDispatch } from "react-redux";
-import { setPost, deleteFeedPost, updateComments } from "../../redux";
+import { setPost, deleteFeedPost, setPosts } from "../../redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Badge from "@mui/material/Badge";
@@ -11,7 +11,9 @@ import {
   FavoriteBorderOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
+import DoDisturbAltIcon from "@mui/icons-material/DoDisturbAlt";
 import { Divider } from "@mui/material";
+import Comments from "./Comments";
 const PostWidget = ({
   postId,
   postUserId,
@@ -31,7 +33,6 @@ const PostWidget = ({
   const mode = useSelector((state) => state.auth.mode);
 
   const isLiked = Boolean(likes[user._id]);
-  const commentCount = Object.keys(comments).length;
   const likeCount = Object.keys(likes).length;
   const [commentInput, setCommentInput] = useState("");
 
@@ -69,11 +70,11 @@ const PostWidget = ({
       console.error("Error submitting comment:", error);
     }
   };
-  //DELETE COMMENT
-  const handleDeleteComment = async (_id) => {
+  //DELETE POST
+  const deletePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/post/${postId}/comment/${_id}`,
+        `http://localhost:3001/post/${postId}/delete`,
         {
           method: "DELETE",
           headers: {
@@ -84,21 +85,18 @@ const PostWidget = ({
       );
       if (response.ok) {
         const updatedPost = await response.json();
-        dispatch(setPost({ post: updatedPost }));
-        dispatch(
-          updateComments({
-            postId,
-            updatedComments: comments.filter((comment) => comment._id !== _id),
-          })
-        );
-      } else {
-        console.error("Failed to delete comment");
+        console.log(updatedPost);
+        dispatch(setPosts({ posts: updatedPost }));
       }
     } catch (error) {
-      console.error("Error deleting comment:", error);
+      console.log(error);
     }
   };
 
+  //DELETE FROM STATE
+  const RemovePostFromState = (postId) => {
+    dispatch(deleteFeedPost({ postId }));
+  };
   //LIKE UNLIKE
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/post/${postId}/like`, {
@@ -113,15 +111,11 @@ const PostWidget = ({
 
     dispatch(setPost({ post: updatedPost }));
   };
-  const handleDeletePost = (postId) => {
-    dispatch(deleteFeedPost({ postId }));
-  };
 
   const handleSharePost = () => {
     const postUrl = window.location.href;
     navigator.clipboard.writeText(postUrl);
 
-   
     alert(`Post URL copied to clipboard: ${postUrl}`);
   };
   return (
@@ -152,7 +146,7 @@ const PostWidget = ({
         <div className="flex w-full justify-between ">
           <div className="flex gap-5">
             <div className="relative flex flex-row  hover:bg-slate-300 p-1 rounded-md">
-              <button className="mx-1 " onClick={patchLike}>
+              <button title="Like it" className="mx-1 " onClick={patchLike}>
                 <Badge badgeContent={likeCount} color="secondary">
                   {isLiked ? (
                     <FavoriteIcon sx={{ color: "red" }} />
@@ -164,6 +158,7 @@ const PostWidget = ({
             </div>
             <div className="relative flex flex-row  hover:bg-slate-300 p-1 rounded-md">
               <button
+                title="Comment"
                 className=" outline-none mx-1"
                 onClick={() => setIsComment(!isComment)}
               >
@@ -174,14 +169,29 @@ const PostWidget = ({
             </div>
           </div>
           <div className="flex-gap">
-            <button className="flex flex-row  hover:bg-slate-300 p-1 rounded-full">
+            <button
+              title="Remove from List"
+              className="flex flex-row  hover:bg-slate-300 p-1 rounded-full"
+            >
+              <span onClick={() => RemovePostFromState(postId)}>
+                <DoDisturbAltIcon sx={{ color: "red" }} />
+              </span>
+            </button>
+            <button
+              title="Share Post"
+              className="flex flex-row  hover:bg-slate-300 p-1 rounded-full"
+            >
               <span onClick={handleSharePost}>
                 <ShareOutlined sx={{ color: "#4f46e5" }} />
               </span>
             </button>
+
             <button
-              className="p-1 hover:bg-red-500 rounded-full"
-              onClick={() => handleDeletePost(postId)}
+              title="Delete at all"
+              className={`${
+                user._id !== postUserId && "hidden"
+              } p-1 hover:bg-red-500 rounded-full`}
+              onClick={() => deletePost(postId)}
             >
               <DeleteIcon sx={{ color: "#3b82f6" }} />
             </button>
@@ -190,33 +200,7 @@ const PostWidget = ({
       </div>
       {isComment && (
         <>
-          <div
-            className={` ${
-              commentCount === 0 && "h-[30px]"
-            } mt-2 py-1 border-[1px] rounded-lg border-slate-600 px-2 overflow-y-auto`}
-          >
-            {commentCount === 0 && (
-              <div className="flex items-center  justify-center w-full h-full">
-                <p className="text-xs">NO COMMENTS</p>
-              </div>
-            )}
-            {comments.map(({ comment, _id, lastName, firstName }) => (
-              <div className=" rounded-lg w-full " key={_id}>
-                <p className="text-[10px] py-1 px-2">{`${firstName} ${lastName}`}</p>
-                <div className="px-3 p-2 rounded-xl bg-green-700">
-                  <p className="pl-3 pr-4 text-sm md:text-md flex justify-between">
-                    <span>{comment}</span>
-                    <span className="hover:bg-slate-800 flex justify-center p-1 w-[22px] h-[22px] rounded-full">
-                      <DeleteIcon
-                        onClick={() => handleDeleteComment(_id)}
-                        sx={{ color: "red", fontSize: "18px" }}
-                      />
-                    </span>
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Comments  postId={postId} comments={comments} />
           <form className="relative">
             <input
               value={commentInput}

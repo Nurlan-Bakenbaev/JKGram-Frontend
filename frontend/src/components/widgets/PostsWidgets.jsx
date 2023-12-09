@@ -2,41 +2,40 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setPosts } from "../../redux";
 import PostWidget from "./PostWidget";
-
 const PostsWidgets = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.auth.posts);
-
   const token = useSelector((state) => state.auth.token);
-  const getPosts = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/post", {
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/post", {
+          method: "GET",
+          headers: { Authorization: `Bearer  ${token}` },
+        });
+        const data = await response.json();
+        const sortedPosts = [...data].sort((a, b) => {
+          const timeA = new Date(a.createdAt).getTime();
+          const timeB = new Date(b.createdAt).getTime();
+          return timeB - timeA;
+        });
+        dispatch(setPosts({ posts: sortedPosts }));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const getUserPosts = async () => {
+      const response = await fetch(`http://localhost:3001/post/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer  ${token}` },
       });
-
       const data = await response.json();
       dispatch(setPosts({ posts: data }));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const getUserPosts = async () => {
-    const response = await fetch(`http://localhost:3001/post/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer  ${token}` },
-    });
-
-    const data = await response.json();
-
-    dispatch(setPosts({ posts: data }));
-  };
-  useEffect(() => {
+    };
     if (isProfile) {
       getUserPosts();
     } else getPosts();
-  }, []); //eslint-disable-line
+  }, [token]); //eslint-disable-line
   return (
     <div>
       {posts?.map(
@@ -54,7 +53,6 @@ const PostsWidgets = ({ userId, isProfile = false }) => {
         }) => (
           <PostWidget
             key={_id}
-          
             postId={_id}
             postUserId={userId}
             name={`${firstName} ${lastName}`}
@@ -70,5 +68,4 @@ const PostsWidgets = ({ userId, isProfile = false }) => {
     </div>
   );
 };
-
 export default PostsWidgets;

@@ -5,11 +5,13 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { useSelector, useDispatch } from "react-redux";
 import { setLogOut, setMode } from "../redux/index";
 import HelpIcon from "@mui/icons-material/Help";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import Badge from "@mui/material/Badge";
 const MenuLinks = ({ setIsMenuOpen }) => {
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
+  const notifications = useSelector((state) => state.auth.notifications);
+
   const userNames = `${user?.firstName} ${user?.lastName}`;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,7 +53,9 @@ const MenuLinks = ({ setIsMenuOpen }) => {
           className="shake transition 
          duration-300 hover:text-red-500 ease-in"
         >
-          <NotificationAddIcon />
+          <Badge badgeContent={notifications.length} color="secondary">
+            <NotificationAddIcon />
+          </Badge>
         </button>
         <button
           className="hover:text-green-400

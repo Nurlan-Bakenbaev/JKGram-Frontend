@@ -5,7 +5,6 @@ import { useEffect } from "react";
 const FriendsListWidget = ({ userId }) => {
   const { user } = useSelector((state) => state.auth);
   const token = useSelector((state) => state.auth.token);
-
   const mode = useSelector((state) => state.auth.mode);
   const dispatch = useDispatch();
   const getFriends = async () => {
@@ -17,19 +16,20 @@ const FriendsListWidget = ({ userId }) => {
       }
     );
     const data = await response.json();
-    dispatch(setFriends({ friends: data }));
+    dispatch(setFriends({ friends: data, append: true }));
   };
-
   useEffect(() => {
     getFriends();
   }, []);
   return (
     <div
-      className={`px-3 mb-4 lg:mb-8  rounded-lg ${
+      className={`${
+        user.friends.length === 0 && "hidden"
+      } px-3 mb-4 lg:mb-8  rounded-lg ${
         mode ? "bg-[#3a3349]" : "bg-white"
       } border border-[#2e2839]`}
     >
-      <p className="py-3">Friends </p>
+      <p className="py-4 text-center">Friends</p>
       {user.friends?.map((friend) => (
         <div
           className="border-b w-full border-[#2e2839] mb-2 px-2 py-1 

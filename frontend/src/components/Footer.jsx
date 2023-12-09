@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
-
 const Footer = () => {
   return (
     <footer className="bg-blue-900  text-white p-8">
@@ -45,5 +44,4 @@ const Footer = () => {
     </footer>
   );
 };
-
 export default Footer;

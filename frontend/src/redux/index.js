@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   mode: true,
   user: null,
   token: null,
   posts: [],
+  notifications: [],
 };
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -21,6 +24,10 @@ export const authSlice = createSlice({
       state.token = null;
       console.log("User is Log out");
     },
+    setNotification: (state, action) => {
+      const { key, value } = action.payload;
+      state.notifications.push({ key, value });
+    },
     setFriends: (state, action) => {
       if (state.user) {
         state.user.friends = action.payload.friends;
@@ -28,7 +35,6 @@ export const authSlice = createSlice({
         console.error("user friends non-existent :(");
       }
     },
-
     setPosts: (state, action) => {
       state.posts = action.payload.posts;
     },
@@ -39,7 +45,6 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
-
     deleteFeedPost: (state, action) => {
       const postIdToDelete = action.payload.postId;
       state.posts = state.posts.filter((post) => post._id !== postIdToDelete);
@@ -53,6 +58,7 @@ export const authSlice = createSlice({
     },
   },
 });
+
 export const {
   setMode,
   setLogin,
@@ -62,5 +68,7 @@ export const {
   setFriends,
   deleteFeedPost,
   updateComments,
+  setNotification,
 } = authSlice.actions;
+
 export default authSlice.reducer;

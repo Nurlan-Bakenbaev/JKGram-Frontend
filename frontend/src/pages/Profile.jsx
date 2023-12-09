@@ -1,13 +1,11 @@
 import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import UserWidget from "../components/widgets/UserWidget";
-import MyPostWidget from "../components/widgets/MyPostWidget";
 import PostsWidgets from "../components/widgets/PostsWidgets";
 import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Followers from "../components/Followers";
 
 const Profile = () => {
   const { _id } = useSelector((state) => state.auth.user);
@@ -15,21 +13,22 @@ const Profile = () => {
   const token = useSelector((state) => state.auth.token);
   const [userData, setUserData] = useState(null);
   const params = useParams();
-  const getUser = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${params.userId}`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const data = await response.json();
 
-    setUserData(data);
-  };
   useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch(
+        `http://localhost:3001/users/${params.userId}`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await response.json();
+
+      setUserData(data);
+    };
     getUser();
-  }, [params.userId, token]); //eslint-disable-line
+  }, [params.userId, token]);
   if (!userData) return null;
   return (
     <div className="w-full min-h-[100vh] max-h-full">
@@ -58,7 +57,7 @@ const Profile = () => {
            items-center lg:flex"
           >
             <AdvertisementWidget />
-            <Followers name={userData} userId={userData._id} />
+            <FriendsListWidget userId={userData._id} />
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@ import SendIcon from "@mui/icons-material/Send";
 import ImageIcon from "@mui/icons-material/Image";
 import { setPosts } from "../../redux";
 import Buttons from "../Buttons";
-
 const MyPostWidget = ({ mode }) => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
@@ -14,7 +13,6 @@ const MyPostWidget = ({ mode }) => {
   const [post, setPost] = useState("");
   const { _id } = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
-
   const handlePost = async () => {
     try {
       const formData = new FormData();
@@ -25,7 +23,6 @@ const MyPostWidget = ({ mode }) => {
         formData.append("picture", image);
         formData.append("picturePath", image.path);
       }
-
       const response = await fetch("http://localhost:3001/posts", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },

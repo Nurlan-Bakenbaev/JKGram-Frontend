@@ -5,14 +5,17 @@ import MyPostWidget from "../components/widgets/MyPostWidget";
 import PostsWidgets from "../components/widgets/PostsWidgets";
 import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
+import RecentPosts from "../components/RecentPosts";
+import { Alert, AlertTitle } from "@mui/material";
 
 const Home = () => {
   const { _id } = useSelector((state) => state.auth.user);
   const mode = useSelector((state) => state.auth.mode);
   return (
-    <div className="w-full min-h-[100vh] max-h-full">
+    <div className="relative w-full min-h-[100vh] max-h-full">
       <Navbar />
-      <div className="w-[90%] md:w-full lg:w-[90%] mx-auto">
+
+      <div className="w-[90%] md:w-[90%] lg:w-[80%] mx-auto">
         <div
           className="
       flex flex-col-reverse 
@@ -21,7 +24,9 @@ const Home = () => {
         >
           <div className="hidden lg:flex flex-col gap-5">
             <UserWidget userId={_id} mode={mode} />
+            <RecentPosts />
           </div>
+
           <div
             className="flex flex-col drop-shadow-md
            w-full justify-center items-center"

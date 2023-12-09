@@ -4,6 +4,7 @@ import {
   getUserPosts,
   likePost,
   commentPost,
+  deletePost,
 } from "../controllers/post.js";
 import { verifyToken } from "../middleware/auth.js";
 import { deleteComment } from "../controllers/post.js";
@@ -18,6 +19,9 @@ router.patch("/:id/like", verifyToken, likePost);
 
 //COMMENT
 router.post("/:postId/comment", verifyToken, commentPost);
+
+// DELETE POST
+router.delete("/:postId/delete", verifyToken, deletePost);
 
 // DELETE COMMENT
 router.delete("/:postId/comment/:_id", deleteComment);

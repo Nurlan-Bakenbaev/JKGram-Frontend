@@ -14,7 +14,6 @@ const UserWidget = ({ userId }) => {
   const token = useSelector((state) => state.auth.token);
   const [user, setUser] = useState(null);
   const LoggedUser = useSelector((state) => state.auth.user);
-
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
@@ -94,14 +93,13 @@ const UserWidget = ({ userId }) => {
               </span>
             </div>
             <Divider sx={{ background: "#2a2536", margin: "5px" }} />
-
             <div className="text-[12px]">
               <span className="flex-gap py-2">
                 <p>Your profile is viewed</p>
                 <p>{viewedProfile}</p>
               </span>
               <span className="flex-gap">
-                <p>Your profile is liked</p>
+                <p>Total likes</p>
                 <p>{impressions}</p>
               </span>
             </div>
@@ -117,7 +115,6 @@ const UserWidget = ({ userId }) => {
           </div>
         )}
       </div>
-
       <div
         className={`${
           isfriendsModal && "h-[30vh] py-2 mt-3"
@@ -128,5 +125,4 @@ const UserWidget = ({ userId }) => {
     </aside>
   );
 };
-
 export default UserWidget;
