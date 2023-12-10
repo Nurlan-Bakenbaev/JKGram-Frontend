@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import Footer from "./components/Footer";
+
 
 const App = () => {
   let mode = useSelector((state) => state.auth.mode);
@@ -29,7 +29,6 @@ const App = () => {
           />
         </Routes>
       </div>
-      <Footer />
     </BrowserRouter>
   );
 };

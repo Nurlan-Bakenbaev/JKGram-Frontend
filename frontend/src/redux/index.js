@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   posts: [],
   notifications: [],
+  userPosts: [],
 };
 
 export const authSlice = createSlice({
@@ -37,6 +38,9 @@ export const authSlice = createSlice({
       } else {
         console.error("user friends non-existent :(");
       }
+    },
+    setUserPosts: (state, action) => {
+      state.userPosts = action.payload.userPosts;
     },
     setPosts: (state, action) => {
       state.posts = action.payload.posts;
@@ -73,6 +77,7 @@ export const {
   updateComments,
   setNotification,
   resetNotifications,
+  setUserPosts,
 } = authSlice.actions;
 
 export default authSlice.reducer;

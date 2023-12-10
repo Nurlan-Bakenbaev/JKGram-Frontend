@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPosts } from "../../redux";
+import { setPosts, setUserPosts } from "../../redux";
 import PostWidget from "./PostWidget";
 const PostsWidgets = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -28,12 +28,16 @@ const PostsWidgets = ({ userId, isProfile = false }) => {
       }
     };
     const getUserPosts = async () => {
-      const response = await fetch(`https://postgrammserver.onrender.com/post/${userId}`, {
-        method: "GET",
-        headers: { Authorization: `Bearer  ${token}` },
-      });
+      const response = await fetch(
+        `https://postgrammserver.onrender.com/post/${userId}`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer  ${token}` },
+        }
+      );
       const data = await response.json();
       dispatch(setPosts({ posts: data }));
+      dispatch(setUserPosts({ userPosts: data }));
     };
     if (isProfile) {
       getUserPosts();

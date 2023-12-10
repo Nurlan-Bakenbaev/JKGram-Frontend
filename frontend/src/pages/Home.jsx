@@ -6,9 +6,7 @@ import PostsWidgets from "../components/widgets/PostsWidgets";
 import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
 import RecentPosts from "../components/RecentPosts";
-import { useEffect } from "react";
-import { setLogin } from "../redux";
-
+import Footer from "../components/Footer";
 const Home = () => {
   const { _id } = useSelector((state) => state.auth.user);
   const mode = useSelector((state) => state.auth.mode);
@@ -49,6 +47,7 @@ const Home = () => {
             <FriendsListWidget userId={_id} />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
