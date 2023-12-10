@@ -28,14 +28,12 @@ app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(
-  cors({
-    origin:
-      "https://657517fea8508d46feee188a--glistening-liger-94a733.netlify.app",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://657517fea8508d46feee188a--glistening-liger-94a733.netlify.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 //FILE STORAGE
