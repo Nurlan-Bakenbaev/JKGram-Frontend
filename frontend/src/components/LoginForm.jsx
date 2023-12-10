@@ -7,6 +7,8 @@ import { setLogin } from "../redux";
 import { Alert } from "@mui/material";
 const LoginForm = ({ setForm }) => {
   const dispatch = useDispatch();
+
+  const[isLoading,setLoading] = useState(false)
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",

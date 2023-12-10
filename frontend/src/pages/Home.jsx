@@ -24,6 +24,8 @@ const Home = () => {
           <div className="hidden  md:flex flex-col gap-3">
             <UserWidget userId={_id} mode={mode} />
             <RecentPosts />
+           <div className="lg:hidden"> <FriendsListWidget userId={_id} /></div>
+
           </div>
 
           <div

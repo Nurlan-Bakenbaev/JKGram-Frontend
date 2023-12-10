@@ -43,7 +43,7 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
   return (
     <div
       className=" rounded-lg drop-shadow-lg flex 
-     justify-between items-start min-w-[220px] mx-auto
+     justify-between items-start min-w-[250px] mx-auto
       md:max-w-[550px] mb-3"
     >
       <div className="text-sm flex gap-3 items-center">

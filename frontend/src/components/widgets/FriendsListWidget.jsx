@@ -27,7 +27,7 @@ const FriendsListWidget = ({ userId }) => {
         user.friends.length === 0 && "hidden"
       } px-3 mb-4 lg:mb-8  rounded-lg ${
         mode ? "bg-[#3a3349]" : "bg-white"
-      } border border-[#2e2839]`}
+      } border border-[#2e2839] h-[70vh] overflow-y-auto`}
     >
       <p className="py-4 text-center">Friends</p>
       {user.friends?.map((friend) => (
