@@ -22,7 +22,6 @@ const MenuLinks = ({ setIsMenuOpen }) => {
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
-
   const userPosts = useSelector((state) => state.auth.userPosts);
   console.log(userPosts);
   const notifications = useSelector((state) => state.auth.notifications);
