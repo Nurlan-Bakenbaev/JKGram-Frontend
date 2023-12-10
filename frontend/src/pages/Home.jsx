@@ -40,7 +40,7 @@ const Home = () => {
             <PostsWidgets userId={_id} />
           </div>
           <div
-            className="hidden flex-col
+            className="hidden  flex-col
            items-center lg:flex"
           >
             <AdvertisementWidget />
