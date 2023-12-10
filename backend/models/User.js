@@ -36,12 +36,6 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    likedPosts: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Post",
-      },
-    ],
     location: String,
     occupation: String,
     viewedProfile: Number,

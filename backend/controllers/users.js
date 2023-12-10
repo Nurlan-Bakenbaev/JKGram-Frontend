@@ -9,16 +9,18 @@ export const getUser = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-// FIND BY NAME
+//FIND BY NAME
 export const getUserByName = async (req, res) => {
   try {
-    const nameParam = req.params;
+    const params = req.params;
+    console.log(params);
     const users = await User.find({
       $or: [
-        { firstName: { $regex: new RegExp(nameParam, "i") } },
-        { lastName: { $regex: new RegExp(nameParam, "i") } },
+        { firstName: { $regex: new RegExp(params.name, "i") } },
+        { lastName: { $regex: new RegExp(params.name, "i") } },
       ],
     });
+
     res.status(200).json(users);
   } catch (err) {
     console.error("Error searching users:", err);
@@ -26,7 +28,6 @@ export const getUserByName = async (req, res) => {
   }
 };
 
-// GET FRIENDS
 export const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
