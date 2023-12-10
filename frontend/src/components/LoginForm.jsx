@@ -5,10 +5,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../redux";
 import { Alert } from "@mui/material";
+import Loader from "./Loader";
 const LoginForm = ({ setForm }) => {
   const dispatch = useDispatch();
 
-  const[isLoading,setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -25,7 +26,7 @@ const LoginForm = ({ setForm }) => {
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://postgrammserver.onrender.com/auth/login",
@@ -35,6 +36,7 @@ const LoginForm = ({ setForm }) => {
       if (response.data) {
         localStorage.setItem("loginData", JSON.stringify(response.data));
         dispatch(setLogin(response.data));
+        setLoading(false);
         navigate("/home");
       }
     } catch (error) {
@@ -57,6 +59,10 @@ const LoginForm = ({ setForm }) => {
     };
     initializeUser();
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="relative">
       <div className="w-[300px] md:w-[500px]  p-6 bg-slate-300 rounded-md ">

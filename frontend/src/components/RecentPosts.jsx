@@ -11,10 +11,13 @@ const RecentPosts = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch("https://postgrammserver.onrender.com/post", {
-          method: "GET",
-          headers: { Authorization: `Bearer  ${token}` },
-        });
+        const response = await fetch(
+          "https://postgrammserver.onrender.com/post",
+          {
+            method: "GET",
+            headers: { Authorization: `Bearer  ${token}` },
+          }
+        );
 
         const data = await response.json();
         const sortedPosts = data.sort((a, b) => {
@@ -33,7 +36,8 @@ const RecentPosts = () => {
     <div
       className={`flex  ${
         mode && "bg-[#3a3349] hover:bg-[#524869]"
-      } flex-col gap-3 px-2 py-4 rounded-md drop-shadow-md`}
+      } flex-col gap-3 px-2 py-4 rounded-md drop-shadow-md border-[0.8px] 
+      border-[#d2d1d1b0]`}
     >
       <h5 className="text-sm text-center"> Most liked Posts:</h5>
       {post

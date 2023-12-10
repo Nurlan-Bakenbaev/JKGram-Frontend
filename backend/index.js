@@ -33,16 +33,21 @@ app.use((req, res, next) => {
     "https://glistening-liger-94a733.netlify.app",
     "http://localhost:5173",
   ];
+
   const origin = req.headers.origin;
+
   if (allowedOrigins.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
   }
+
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type");
 
   next();
 });
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+
 //FILE STORAGE
 const storage = multer.diskStorage({
   destination: function (req, file, cd) {
@@ -70,5 +75,7 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port:${PORT}`));
+     User.insertMany(users);
+     Post.insertMany(posts);
   })
   .catch((err) => console.log(`${err} did not connect`));

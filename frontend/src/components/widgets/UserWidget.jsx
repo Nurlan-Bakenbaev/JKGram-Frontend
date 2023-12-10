@@ -48,8 +48,8 @@ const UserWidget = ({ userId }) => {
       className={` ${
         mode ? "bg-[#3a3349] hover:bg-[#524869]" : " bg-white"
       } mx-auto min-w-[280px] w-full md:max-w-[520px]
-      drop-shadow-lg border-[0.8px] 
-      border-[#4f4f4fb0] p-4 rounded-md`}
+      drop-shadow-lg  border-[0.5px] 
+    border-[#cccbcbb0] p-4 rounded-md`}
     >
       <div className="flex flex-col">
         <div className="flex-gap ">
@@ -120,8 +120,8 @@ const UserWidget = ({ userId }) => {
       </div>
       <div
         className={`${
-          isfriendsModal && "h-[30vh] py-2 mt-3"
-        } block md:hidden  overflow-y-auto`}
+          isfriendsModal && "py-2 mt-3"
+        } block md:hidden  `}
       >
         {isfriendsModal && <FriendsListWidget userId={user._id} />}
       </div>

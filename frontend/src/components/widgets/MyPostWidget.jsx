@@ -64,8 +64,8 @@ const MyPostWidget = ({ mode }) => {
     <div
       className={`md:max-w-[520px] mb-5  w-full drop-shadow-md ${
         mode ? "bg-[#3a3349] hover:bg-[#524869]" : "bg-white"
-      } md:w-full px-5 py-4  flex-gap flex-col border
-      border-[#4f4f4fb7] p-2 rounded-lg`}
+      } md:w-full px-5 py-4  flex-gap flex-col  border-[0.5px] 
+      border-[#cccbcbb0] p-2 rounded-lg`}
     >
       <div className="w-full">
         <input

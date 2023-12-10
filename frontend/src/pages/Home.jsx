@@ -24,7 +24,8 @@ const Home = () => {
           <div className="hidden  md:flex flex-col gap-3">
             <UserWidget userId={_id} mode={mode} />
             <RecentPosts />
-           <div className="lg:hidden"> <FriendsListWidget userId={_id} /></div>
+           <div className="block lg:hidden"> 
+           <FriendsListWidget userId={_id} /></div>
 
           </div>
 
@@ -36,7 +37,7 @@ const Home = () => {
               <MyPostWidget mode={mode} />
             </div>
 
-            <div className="w-full mt-5 mb-5  flex flex-col lg:hidden">
+            <div className="w-full mt-5 mb-5  flex flex-col md:hidden">
               <UserWidget userId={_id} mode={mode} />
             </div>
             <PostsWidgets userId={_id} />

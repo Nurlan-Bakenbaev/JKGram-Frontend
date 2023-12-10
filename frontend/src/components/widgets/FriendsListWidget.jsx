@@ -7,6 +7,7 @@ const FriendsListWidget = ({ userId }) => {
   const token = useSelector((state) => state.auth.token);
   const mode = useSelector((state) => state.auth.mode);
   const dispatch = useDispatch();
+
   const getFriends = async () => {
     const response = await fetch(
       `https://postgrammserver.onrender.com/users/${userId}/friends`,
@@ -21,18 +22,21 @@ const FriendsListWidget = ({ userId }) => {
   useEffect(() => {
     getFriends();
   }, []);
+
   return (
     <div
       className={`${
         user.friends.length === 0 && "hidden"
       } px-3 mb-4 lg:mb-8  rounded-lg ${
         mode ? "bg-[#3a3349]" : "bg-white"
-      } border border-[#2e2839] h-[70vh] overflow-y-auto`}
+      } border-[0.5px] 
+      border-[#cccbcbb0] max-h-[50vh] overflow-y-auto`}
     >
       <p className="py-4 text-center">Friends</p>
-      {user.friends?.map((friend) => (
+      {user.friends.map((friend) => (
         <div
-          className="border-b w-full border-[#2e2839] mb-2 px-2 py-1 
+          className="w-full  border-b-[0.8px] 
+          border-[#d2d1d1b0] mb-2 px-2 py-1 
           rounded-md transition duration-200 hover:bg-slate-300 "
           key={friend._id}
         >

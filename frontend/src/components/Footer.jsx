@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 const Footer = () => {
   return (
-    <footer className="bg-blue-900  text-white p-8">
+    <footer className=" border-t border-blue-300 rounded-sm mt-10 p-8">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>

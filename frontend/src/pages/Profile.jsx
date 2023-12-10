@@ -6,6 +6,7 @@ import AdvertisementWidget from "../components/widgets/Advertisement";
 import FriendsListWidget from "../components/widgets/FriendsListWidget";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Profile = () => {
   const { _id } = useSelector((state) => state.auth.user);
@@ -13,9 +14,11 @@ const Profile = () => {
   const token = useSelector((state) => state.auth.token);
   const [userData, setUserData] = useState(null);
   const params = useParams();
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
+      setLoading(true);
       const response = await fetch(
         `https://postgrammserver.onrender.com/users/${params.userId}`,
         {
@@ -26,9 +29,13 @@ const Profile = () => {
       const data = await response.json();
 
       setUserData(data);
+      setLoading(false);
     };
     getUser();
   }, [params.userId, token]);
+  if (isLoading) {
+    return <Loader />;
+  }
   if (!userData) return null;
   return (
     <div className="w-full min-h-[100vh] max-h-full">

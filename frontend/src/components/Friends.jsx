@@ -6,13 +6,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "../redux";
-const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
+const Friends = ({ postUserId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth);
   const { friends } = useSelector((state) => state.auth.user);
-  const isFriend = friends.find((friend) => friend._id === postUserId);
+  const isFriend = friends?.find((friend) => friend._id === postUserId);
   const pathProfile = location.pathname.includes(`/profile/${postUserId}`);
 
   const patchFriend = async () => {
@@ -39,7 +39,6 @@ const Friends = ({ userId, postUserId, name, subtitle, userPicturePath }) => {
       console.error(error);
     }
   };
-
   return (
     <div
       className=" rounded-lg drop-shadow-lg flex 
