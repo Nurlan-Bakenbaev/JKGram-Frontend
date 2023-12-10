@@ -30,7 +30,8 @@ app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:
+      "https://657517fea8508d46feee188a--glistening-liger-94a733.netlify.app/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
