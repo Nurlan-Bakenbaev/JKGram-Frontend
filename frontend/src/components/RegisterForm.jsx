@@ -40,7 +40,6 @@ const Register = ({ setForm }) => {
         "https://postgrammserver.onrender.com/auth/register",
         formData
       );
-
       if (response) {
         setIsLoading(false);
         setForm("login");
