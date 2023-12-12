@@ -30,7 +30,7 @@ app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use((req, res, next) => {
   const allowedOrigins = [
-    "https://luminous-seahorse-a69545.netlify.app/",
+    "",
     "http://localhost:5173",
   ];
 

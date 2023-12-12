@@ -61,11 +61,11 @@ const LoginForm = ({ setForm }) => {
   }, []);
 
   if (isLoading) {
-    return <Loader />;
+    return <div ><Loader/></div>;
   }
   return (
-    <div className="relative">
-      <div className="w-[300px] md:w-[500px]  p-6 bg-slate-300 rounded-md ">
+    <div className="relative h-screen">
+      <div className="w-[300px]  md:w-[500px]  p-6 bg-slate-300 rounded-md ">
         <h2 className="text-2xl md:text-4xl  text-center  text-gray-800 mb-6">
           Login
         </h2>
