@@ -36,7 +36,7 @@ const LoginForm = ({ setForm }) => {
       if (response.data) {
         localStorage.setItem("loginData", JSON.stringify(response.data));
         dispatch(setLogin(response.data));
-        setLoading(false);
+        setErrMsg(false);
         navigate("/home");
       }
     } catch (error) {
@@ -61,7 +61,11 @@ const LoginForm = ({ setForm }) => {
   }, []);
 
   if (isLoading) {
-    return <div ><Loader/></div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
   return (
     <div className="relative mt-3">
