@@ -65,7 +65,7 @@ const Register = ({ setForm }) => {
             className="text-3xl text-center 
            text-slate-700 mb-6"
           >
-            register
+            Register
           </h2>
           <form
             onSubmit={handleSubmit}
