@@ -30,7 +30,7 @@ app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use((req, res, next) => {
   const allowedOrigins = [
-    "https://658223e5f5a7d67ce562c10a--fancy-lebkuchen-c57bc3.netlify.app",
+    "https://fancy-lebkuchen-c57bc3.netlify.app/",
     "http://localhost:5173",
   ];
 
