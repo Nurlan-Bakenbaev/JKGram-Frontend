@@ -1,4 +1,6 @@
 Social Media App (Currently Server is off )
+
+
 A full-featured social media platform built using React.js, Node.js, Express, and Redux Toolkit, allowing users to create posts (text and photo), interact with other users, follow/unfollow, and manage their profiles with occupation and location details.
 
 Features
